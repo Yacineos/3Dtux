@@ -35,7 +35,7 @@ public class Jeu {
         // Instancie un profil par défaut
         profil = new Profil();
         
-        lettres = new ArrayList<Letter>();
+        lettres = new ArrayList<>();
     }
     
     public void execute() {
@@ -56,33 +56,20 @@ public class Jeu {
         // Instancie un Tux
         Tux tux = new Tux(env , room);
         env.addObject(tux);
-        Tux tux1 = new Tux(env , room);
-        env.addObject(tux1);Tux tux2 = new Tux(env , room);
-        env.addObject(tux2);Tux tux3 = new Tux(env , room);
-        env.addObject(tux3);
+     
         // instancie une lettre pour la tester 
         Letter letterN = new Letter('n',30.0,20.0,env , room);
         lettres.add(letterN);
         Letter letterI = new Letter('i',50,20.0,env , room);
         lettres.add(letterI);
-        Letter letterG = new Letter('g',60,20.0,env , room);
-        lettres.add(letterG);
-        Letter letterE = new Letter('e',70,20.0,env , room);
-        lettres.add(letterE);
-        Letter letterR = new Letter('r',80,20.0,env , room);
-        lettres.add(letterR);
-        Letter letterI2 = new Letter('i',85,20.0,env , room);
-        lettres.add(letterI2);
         Letter letterA = new Letter('a',95,20.0,env , room);
         lettres.add(letterA  );
-
+        Letter letterSpace = new Letter(' ',10,40.0,env , room);
+        lettres.add(letterA  );
         env.addObject(letterN);
         env.addObject(letterI);
-        env.addObject(letterG);
-        env.addObject(letterE);
-        env.addObject(letterR);
-        env.addObject(letterI2);
         env.addObject(letterA);
+        env.addObject(letterSpace);
         // Ici, on peut initialiser des valeurs pour une nouvelle partie
         demarrepartie(partie);
          
