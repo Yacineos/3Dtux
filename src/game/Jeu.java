@@ -26,7 +26,7 @@ public class Jeu {
         room = new Room();
 
         // Règle la camera
-        env.setCameraXYZ(50, 60, 175);
+        env.setCameraXYZ(50, 60, 275);
         env.setCameraPitch(-20);
 
         // Désactive les contrôles par défaut
