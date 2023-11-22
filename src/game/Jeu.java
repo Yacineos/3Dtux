@@ -26,7 +26,7 @@ public class Jeu {
         room = new Room();
 
         // Règle la camera
-        env.setCameraXYZ(50, 60, 275);
+        env.setCameraXYZ(50, 60, 175);
         env.setCameraPitch(-20);
 
         // Désactive les contrôles par défaut
@@ -113,6 +113,15 @@ public class Jeu {
     protected void terminePartie(Partie partie){
         
     }
+    
+    protected double distance(Letter letter){
+        return 0;
+    }
+    protected boolean collision(Letter letter){
+        return false ;
+    }
+    
+    
     
     
 }
