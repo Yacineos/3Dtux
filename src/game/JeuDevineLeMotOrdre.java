@@ -9,5 +9,23 @@ package game;
  * @author OUKKAL Yacine
  */
 public class JeuDevineLeMotOrdre extends Jeu {
+    private int nbLettersRestantes ;
+    private Chronometre chrono ;
     
+    public JeuDevineLeMotOrdre(){
+        
+    }
+    
+    protected void demarrePartie(Partie partie){
+           
+    }
+    protected void appliqueRegles(Partie partie){
+        
+    }
+    protected void terminePartie(Partie partie){
+        
+    }
+    private boolean tuxTrouveLettre(){
+        return false ;
+    }
 }
