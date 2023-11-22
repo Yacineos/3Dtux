@@ -69,7 +69,7 @@ public class Dico {
     }
     
     public String getCheminFichierDico(){
-        return "src/partie_XML/actes.xml";
+        return this.cheminFichierDico;
     }
     //vérifie si le niveau est compris entre 1 et 5 
     // return le numéro entré en paramètre si vrai 
