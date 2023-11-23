@@ -5,6 +5,7 @@
 package game;
 
 import env3d.Env;
+import env3d.EnvBasic;
 import env3d.advanced.EnvNode;
 import org.lwjgl.input.Keyboard;
 
@@ -52,6 +53,17 @@ public class Tux extends EnvNode{
             this.setX(this.getX() + 1.0);
              System.out.println(""+collisionADroite());
        }
+        if(env.getKeyDown(Keyboard.KEY_O)){
+            env.soundPlay("sounds/ohShitNotGood.wav");            
+        }
+        if(env.getKeyDown(Keyboard.KEY_P)){
+            env.soundPlay("sounds/caVaPeter.wav");            
+        }
+        
+        if(env.getKeyDown(Keyboard.KEY_N)){
+            env.soundPlay("sounds/NoNoNo.wav");            
+        }
+        
         
        System.out.println("x : "+this.getX() + " , y : "+this.getZ());
     }
