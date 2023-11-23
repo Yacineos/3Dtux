@@ -49,7 +49,7 @@ public abstract class Jeu {
         Letter letterA = new Letter('a',95,20.0,env , room);
         lettres.add(letterA  );
         Letter letterSpace = new Letter(' ',10,40.0,env , room);
-        lettres.add(letterA  );
+        lettres.add(letterSpace );
     }
     
     public void execute() {
@@ -70,7 +70,7 @@ public abstract class Jeu {
         // Instancie un Tux
         this.tux = new Tux(env , room);
         env.addObject(tux);
-     
+        
         // instancie une lettre pour la tester 
         
         /*
@@ -80,7 +80,7 @@ public abstract class Jeu {
         env.addObject(letterSpace);
         */
         // ou bien 
-        Arrays.asList(this.lettres.get(0), letterI, letterA, letterSpace).forEach(env::addObject);
+        Arrays.asList(this.lettres.get(0), this.lettres.get(1), this.lettres.get(2), this.lettres.get(3)).forEach(env::addObject);
         // Ici, on peut initialiser des valeurs pour une nouvelle partie
         demarrepartie(partie);
          
@@ -152,8 +152,19 @@ public abstract class Jeu {
     protected boolean collision(Letter letter){
         //TODO 1.2
         //System.out.println(""+distance(letter));
-        return distance(letter) < 10.0 ? true : false ;
+        return distance(letter) < 10.0 ;
     }
+    
+    protected void nextRandomPosition(){
+        
+    }
+    
+    protected double generateRandomCoor(int coor1 , int coor2){
+        return Math.random();
+    }
+    
+    
+    
     
     
     

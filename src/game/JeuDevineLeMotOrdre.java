@@ -35,7 +35,7 @@ public class JeuDevineLeMotOrdre extends Jeu {
     }
     protected void appliqueRegles(Partie partie){
         if(tuxTrouveLettre()){
-            //this.nbLettersRestantes--;
+            this.nbLettersRestantes--;
             System.out.println(""+this.nbLettersRestantes);
         }
     }
@@ -50,9 +50,9 @@ public class JeuDevineLeMotOrdre extends Jeu {
         // récupérer l'indice de la permière lettre parmis les lettres restantes 
         // taille - nbr restant
         int indicePremiereLettreParmisLesRestante = this.getLettres().size() - getNbLettresRestantes() ;
-        //if( indicePremiereLettreParmisLesRestante < this.getLettres().size()){
-            res = this.collision(this.getLettres().get(0));
-        //}
+        if( indicePremiereLettreParmisLesRestante < this.getLettres().size()){
+            res = this.collision(this.getLettres().get(indicePremiereLettreParmisLesRestante));
+        }
         return res ? true : false ;
     }
     
