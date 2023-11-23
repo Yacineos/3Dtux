@@ -41,6 +41,15 @@ public abstract class Jeu {
         lettres = new ArrayList<>();
         
         dico = new Dico("src/partie_XML/actes.xml");
+        
+        Letter letterN = new Letter('n',30.0,20.0,env , room);
+        lettres.add(letterN);
+        Letter letterI = new Letter('i',50,20.0,env , room);
+        lettres.add(letterI);
+        Letter letterA = new Letter('a',95,20.0,env , room);
+        lettres.add(letterA  );
+        Letter letterSpace = new Letter(' ',10,40.0,env , room);
+        lettres.add(letterA  );
     }
     
     public void execute() {
@@ -63,14 +72,7 @@ public abstract class Jeu {
         env.addObject(tux);
      
         // instancie une lettre pour la tester 
-        Letter letterN = new Letter('n',30.0,20.0,env , room);
-        lettres.add(letterN);
-        Letter letterI = new Letter('i',50,20.0,env , room);
-        lettres.add(letterI);
-        Letter letterA = new Letter('a',95,20.0,env , room);
-        lettres.add(letterA  );
-        Letter letterSpace = new Letter(' ',10,40.0,env , room);
-        lettres.add(letterA  );
+        
         /*
         env.addObject(letterN);
         env.addObject(letterI);
@@ -78,7 +80,7 @@ public abstract class Jeu {
         env.addObject(letterSpace);
         */
         // ou bien 
-        Arrays.asList(letterN, letterI, letterA, letterSpace).forEach(env::addObject);
+        Arrays.asList(this.lettres.get(0), letterI, letterA, letterSpace).forEach(env::addObject);
         // Ici, on peut initialiser des valeurs pour une nouvelle partie
         demarrepartie(partie);
          
@@ -100,7 +102,7 @@ public abstract class Jeu {
             // ... (sera complété plus tard) ...
                tux.deplace();
                
-               System.out.println(collision(this.lettres.get(0)));
+               //System.out.println(collision(this.lettres.get(0)));
             // Ici, on applique les regles
             appliqueRegles(partie);
  
@@ -135,11 +137,12 @@ public abstract class Jeu {
          // axe des profondeur
         
         // on récupère la postion de la lettre 
-        System.out.println("tuxX:"+this.tux.getX()); 
+        /*
+                System.out.println("tuxX:"+this.tux.getX()); 
         System.out.println("letterN:"+letter.getX()); 
         System.out.println("tuxZ:"+this.tux.getZ()); 
         System.out.println("letterZ:"+letter.getZ()); 
-        
+        */
         // formule calcule de distance entre 2 points 
         // d = racineCarre ( puissance2 ( x2 - x1 ) + puissance2 ( y2 - y1 ) )
         double dist = Math.sqrt(Math.pow(( this.tux.getX() - letter.getX()),2) + Math.pow(this.tux.getZ()-letter.getZ(), 2));
@@ -148,7 +151,7 @@ public abstract class Jeu {
     //la méthode collision(letter:Letter) : Boolean de la classe Jeu renvoie true si le personnage et la lettre sont en collision. Attention à la taille (scale) de vos objets.
     protected boolean collision(Letter letter){
         //TODO 1.2
-        System.out.println(""+distance(letter));
+        //System.out.println(""+distance(letter));
         return distance(letter) < 10.0 ? true : false ;
     }
     

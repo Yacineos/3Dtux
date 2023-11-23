@@ -26,13 +26,18 @@ public class JeuDevineLeMotOrdre extends Jeu {
     //Le constructeur de cette classe devra appeler le constructeur de la classe de base Jeu.
     public JeuDevineLeMotOrdre(){
         super();
+        this.nbLettersRestantes = super.getLettres().size();
+        System.out.println(""+nbLettersRestantes);
     }
     
     protected void demarrepartie(Partie partie){
            
     }
     protected void appliqueRegles(Partie partie){
-        
+        if(tuxTrouveLettre()){
+            //this.nbLettersRestantes--;
+            System.out.println(""+this.nbLettersRestantes);
+        }
     }
     protected void terminePartie(Partie partie){
         
@@ -45,9 +50,9 @@ public class JeuDevineLeMotOrdre extends Jeu {
         // récupérer l'indice de la permière lettre parmis les lettres restantes 
         // taille - nbr restant
         int indicePremiereLettreParmisLesRestante = this.getLettres().size() - getNbLettresRestantes() ;
-        if( indicePremiereLettreParmisLesRestante < this.getLettres().size()){
-            res = this.collision(this.getLettres().get(indicePremiereLettreParmisLesRestante));
-        }
+        //if( indicePremiereLettreParmisLesRestante < this.getLettres().size()){
+            res = this.collision(this.getLettres().get(0));
+        //}
         return res ? true : false ;
     }
     
