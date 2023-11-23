@@ -99,6 +99,8 @@ public abstract class Jeu {
             // Contrôles des déplacements de Tux (gauche, droite, ...)
             // ... (sera complété plus tard) ...
                tux.deplace();
+               
+               System.out.println(collision(this.lettres.get(0)));
             // Ici, on applique les regles
             appliqueRegles(partie);
  
@@ -116,20 +118,38 @@ public abstract class Jeu {
     protected abstract void appliqueRegles(Partie partie);
     
     protected abstract void terminePartie(Partie partie);
+
+    public ArrayList<Letter> getLettres() {
+        return lettres;
+    }
     
+    
+    
+    //la méthode distance(letter:Letter) : double de la classe Jeu renvoie la distance du personnage tux à la lettre.
     protected double distance(Letter letter){
         //TODO 1.1
         // sachant que le point (0,0) c'est le point le plus éloigné à gauche
+        
         // on récupère la position du tux
-        //this.tux.getX(); // axe des gauche droite
-        //this.tux.getZ(); // axe des profondeur
+        // axe des gauche droite
+         // axe des profondeur
         
+        // on récupère la postion de la lettre 
+        System.out.println("tuxX:"+this.tux.getX()); 
+        System.out.println("letterN:"+letter.getX()); 
+        System.out.println("tuxZ:"+this.tux.getZ()); 
+        System.out.println("letterZ:"+letter.getZ()); 
         
-        return 0;
+        // formule calcule de distance entre 2 points 
+        // d = racineCarre ( puissance2 ( x2 - x1 ) + puissance2 ( y2 - y1 ) )
+        double dist = Math.sqrt(Math.pow(( this.tux.getX() - letter.getX()),2) + Math.pow(this.tux.getZ()-letter.getZ(), 2));
+        return dist;
     }
+    //la méthode collision(letter:Letter) : Boolean de la classe Jeu renvoie true si le personnage et la lettre sont en collision. Attention à la taille (scale) de vos objets.
     protected boolean collision(Letter letter){
         //TODO 1.2
-        return false ;
+        System.out.println(""+distance(letter));
+        return distance(letter) < 10.0 ? true : false ;
     }
     
     

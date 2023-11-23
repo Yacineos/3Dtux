@@ -33,25 +33,25 @@ public class Tux extends EnvNode{
             // Haut
             this.setRotateY(180);
             this.setZ(this.getZ() - 1.0);
-            System.out.println(""+collisionProfonde());
+          
         }
         if ((env.getKeyDown(Keyboard.KEY_Q) || env.getKeyDown(Keyboard.KEY_LEFT) )&& !collisionAgauche()) { // Fleche 'gauche' ou Q
             // Gauche
             this.setRotateY(270);
             this.setX(this.getX() - 1.0);
-             System.out.println(""+collisionAgauche());
+            
        }
         if ((env.getKeyDown(Keyboard.KEY_S) || env.getKeyDown(Keyboard.KEY_DOWN) )&& !collisionNonProfone()) { // Fleche 'haut' ou Z
             // Haut
             this.setRotateY(360);
             this.setZ(this.getZ() + 1.0);
-             System.out.println(""+collisionNonProfone());
+         
         }
         if ((env.getKeyDown(Keyboard.KEY_D) || env.getKeyDown(Keyboard.KEY_RIGHT))&& !collisionADroite()) { // Fleche 'gauche' ou Q
             // Gauche
             this.setRotateY(90);
             this.setX(this.getX() + 1.0);
-             System.out.println(""+collisionADroite());
+           
        }
         if(env.getKeyDown(Keyboard.KEY_O)){
             env.soundPlay("sounds/ohShitNotGood.wav");            
@@ -65,7 +65,7 @@ public class Tux extends EnvNode{
         }
         
         
-       System.out.println("x : "+this.getX() + " , y : "+this.getZ());
+       //System.out.println("x : "+this.getX() + " , y : "+this.getZ());
     }
     
     /*

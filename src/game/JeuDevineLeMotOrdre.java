@@ -25,7 +25,7 @@ public class JeuDevineLeMotOrdre extends Jeu {
     
     //Le constructeur de cette classe devra appeler le constructeur de la classe de base Jeu.
     public JeuDevineLeMotOrdre(){
-        
+        super();
     }
     
     protected void demarrepartie(Partie partie){
@@ -37,16 +37,28 @@ public class JeuDevineLeMotOrdre extends Jeu {
     protected void terminePartie(Partie partie){
         
     }
+    //tuxTrouveLettre() : Boolean
+    // renvoie true si la première lettre de la liste de lettres (restantes) du mot est en contact avec le personnage tux.
     private boolean tuxTrouveLettre(){
-        return false ;
+        boolean res = false;
+
+        // récupérer l'indice de la permière lettre parmis les lettres restantes 
+        // taille - nbr restant
+        int indicePremiereLettreParmisLesRestante = this.getLettres().size() - getNbLettresRestantes() ;
+        if( indicePremiereLettreParmisLesRestante < this.getLettres().size()){
+            res = this.collision(this.getLettres().get(indicePremiereLettreParmisLesRestante));
+        }
+        return res ? true : false ;
     }
     
     private int getNbLettresRestantes(){
-        return 0;
+        return this.nbLettersRestantes;
     }
     
     private int getTemps(){
         return 0 ;
     }
+    
+    
 
 }

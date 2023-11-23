@@ -32,5 +32,4 @@ public class Letter extends EnvNode{
     }
     
     
-    
 }
