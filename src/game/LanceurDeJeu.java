@@ -15,7 +15,7 @@ public class LanceurDeJeu {
         // Declare un Jeu
         Jeu jeu ;
         //Instancie un nouveau jeu
-        jeu =  new Jeu();
+        jeu =  new JeuDevineLeMotOrdre();
         //Execute le jeu
         jeu.execute();
     }

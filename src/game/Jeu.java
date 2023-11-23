@@ -6,17 +6,20 @@ package game;
 
 import env3d.Env;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
  * @author oukkaly
  */
-public class Jeu {
+public abstract class Jeu {
     
     private Env env ;
     private Room room ; 
     private Profil profil;
     private ArrayList<Letter> lettres;
+    private Dico dico; 
+    private Tux tux;
     
     public Jeu(){ 
         // Crée un nouvel environnement
@@ -36,6 +39,8 @@ public class Jeu {
         profil = new Profil();
         
         lettres = new ArrayList<>();
+        
+        dico = new Dico("src/partie_XML/actes.xml");
     }
     
     public void execute() {
@@ -54,7 +59,7 @@ public class Jeu {
         env.setRoom(room);
  
         // Instancie un Tux
-        Tux tux = new Tux(env , room);
+        this.tux = new Tux(env , room);
         env.addObject(tux);
      
         // instancie une lettre pour la tester 
@@ -66,10 +71,14 @@ public class Jeu {
         lettres.add(letterA  );
         Letter letterSpace = new Letter(' ',10,40.0,env , room);
         lettres.add(letterA  );
+        /*
         env.addObject(letterN);
         env.addObject(letterI);
         env.addObject(letterA);
         env.addObject(letterSpace);
+        */
+        // ou bien 
+        Arrays.asList(letterN, letterI, letterA, letterSpace).forEach(env::addObject);
         // Ici, on peut initialiser des valeurs pour une nouvelle partie
         demarrepartie(partie);
          
@@ -102,22 +111,24 @@ public class Jeu {
  
     }    
     
-    protected void demarrepartie(Partie partie){
-        
-    }
+    protected abstract void demarrepartie(Partie partie);
     
-    protected void appliqueRegles(Partie partie){
-        
-    }
+    protected abstract void appliqueRegles(Partie partie);
     
-    protected void terminePartie(Partie partie){
-        
-    }
+    protected abstract void terminePartie(Partie partie);
     
     protected double distance(Letter letter){
+        //TODO 1.1
+        // sachant que le point (0,0) c'est le point le plus éloigné à gauche
+        // on récupère la position du tux
+        //this.tux.getX(); // axe des gauche droite
+        //this.tux.getZ(); // axe des profondeur
+        
+        
         return 0;
     }
     protected boolean collision(Letter letter){
+        //TODO 1.2
         return false ;
     }
     

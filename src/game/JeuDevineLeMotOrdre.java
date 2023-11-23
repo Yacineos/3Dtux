@@ -28,7 +28,7 @@ public class JeuDevineLeMotOrdre extends Jeu {
         
     }
     
-    protected void demarrePartie(Partie partie){
+    protected void demarrepartie(Partie partie){
            
     }
     protected void appliqueRegles(Partie partie){
@@ -40,4 +40,13 @@ public class JeuDevineLeMotOrdre extends Jeu {
     private boolean tuxTrouveLettre(){
         return false ;
     }
+    
+    private int getNbLettresRestantes(){
+        return 0;
+    }
+    
+    private int getTemps(){
+        return 0 ;
+    }
+
 }
