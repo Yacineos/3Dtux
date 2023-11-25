@@ -40,15 +40,19 @@ import org.xml.sax.SAXException;
             this.nbLettersRestantes = super.getLettres().size();
             
         }
-        protected void appliqueRegles(Partie partie){
+        protected boolean appliqueRegles(Partie partie){
+            System.out.println(this.chrono.getActualTime());
             //puis utilisé pour arrêter le jeu au bout d'un temps limité
             if(nbLettersRestantes > 0){
                 if(tuxTrouveLettre()){
                     this.nbLettersRestantes--;
                     System.out.println(""+this.nbLettersRestantes);
                 }
+                return false ;
             }else{
-                terminePartie(partie);            }
+                this.chrono.stop();
+                return true ;
+            }
             // Optionnel : 
             /*
             if(this.chrono.remains15sec()){
@@ -60,7 +64,7 @@ import org.xml.sax.SAXException;
             //Si le mot est déterminé avant le temps limité, 
             //alors le temps qui a été nécessaire pour le trouver est enregistré 
             //dans la partie en cours (terminePartie).
-            this.chrono.stop();
+            
             if(this.chrono.remainsTime()){
                 partie.setTrouve(this.nbLettersRestantes);
                 partie.setTemps(this.chrono.getSeconds());

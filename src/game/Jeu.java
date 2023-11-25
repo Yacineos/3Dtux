@@ -6,6 +6,7 @@ package game;
 
 import env3d.Env;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.xml.parsers.ParserConfigurationException;
@@ -22,6 +23,7 @@ public abstract class Jeu {
     private Profil profil;
     private ArrayList<Letter> lettres;
     private ArrayList<Position> listPositionLettres ;
+    private String mot ;
     private Dico dico; 
     private Tux tux;
     
@@ -45,7 +47,7 @@ public abstract class Jeu {
         dico = new Dico("");
         dico.lireDictionnaireDOM("src/partie_XML/","dico.xml" );
 
-        String mot = dico.getMotDepuisListNiveaux(1);
+        this.mot = dico.getMotDepuisListNiveaux(1);
         System.out.println(""+mot);
         
         listPositionLettres = new ArrayList<>();
@@ -68,9 +70,10 @@ public abstract class Jeu {
     }
     public void execute() {
  
+        Partie partie = new Partie(""+LocalDate.now(),this.mot,1);
         // pour l'instant, nous nous contentons d'appeler la méthode joue comme cela
         // et nous créons une partie vide, juste pour que cela fonctionne
-        joue(new Partie());
+        joue(partie);
          
         // Détruit l'environnement et provoque la sortie du programme 
         env.exit();
@@ -104,7 +107,7 @@ public abstract class Jeu {
         
 
         
-        while (!finished) {
+        while (!appliqueRegles(partie)) {
             
             env.setCameraXYZ(this.tux.getX(), 60, this.tux.getZ()+100);
  
@@ -120,7 +123,7 @@ public abstract class Jeu {
                
                //System.out.println(collision(this.lettres.get(0)));
             // Ici, on applique les regles
-            appliqueRegles(partie);
+            
  
             // Fait avancer le moteur de jeu (mise à jour de l'affichage, de l'écoute des événements clavier...)
             env.advanceOneFrame();
@@ -133,7 +136,7 @@ public abstract class Jeu {
     
     protected abstract void demarrepartie(Partie partie);
     
-    protected abstract void appliqueRegles(Partie partie);
+    protected abstract boolean appliqueRegles(Partie partie);
     
     protected abstract void terminePartie(Partie partie);
 

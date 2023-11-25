@@ -21,6 +21,10 @@ public class Chronometre {
     public void stop(){
         end = System.currentTimeMillis();
     }
+    //gives the accurate actual time since the start of the chrono till this second , time is given in seconds
+    public int getActualTime(){ 
+        return (int)((System.currentTimeMillis()-this.begin)/1000.0);
+    }
  
     public long getTime() {
         return end-begin;
