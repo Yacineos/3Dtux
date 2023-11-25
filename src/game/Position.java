@@ -12,6 +12,11 @@ public class Position {
     private double x ;
     private double y ;
 
+    public Position() {
+    }
+    
+    
+
     public Position(double x, double y) {
         this.x = x;
         this.y = y;
@@ -35,8 +40,18 @@ public class Position {
     
     
     public boolean samePosition(Position p){
-        return (p.getX() == getX() && p.getY() == getY());
+        return distance(p) < 10.0;
     }
+
+    protected double distance(Position p){
+        double dist = Math.sqrt(Math.pow(( this.getX()- p.getX()),2) + Math.pow(this.getY()-p.getY(), 2));
+        return dist;
+    }
+    @Override
+    public String toString() {
+        return "Position{" + "x=" + x + ", y=" + y + '}';
+    }
+    
     
     
     

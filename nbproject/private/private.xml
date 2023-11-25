@@ -3,23 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/TuxLetterGame_template/src/game/Profil.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/TuxLetterGame_template/src/game/Letter.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/TuxLetterGame_template/src/game/Jeu.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/TuxLetterGame_template/src/game/Partie.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/TuxLetterGame_template/src/partie_XML/TestParserSAX.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/TuxLetterGame_template/src/partie_XML/testSAX.xml</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/TuxLetterGame_template/src/game/Tux.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/TuxLetterGame_template/src/game/JeuDevineLeMotOrdre.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/TuxLetterGame_template/test/test/TestDico.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/TuxLetterGame_template/src/game/LanceurDeJeu.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/TuxLetterGame_template/src/game/Chronometre.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/TuxLetterGame_template/src/game/Dico.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/TuxLetterGame_template/src/game/Room.java</file>
-=======
-            <file>file:/home/o/oukkaly/NetBeansProjects/3Dtux/src/game/Profil.java</file>
->>>>>>> 1d3656f397492f45ccea27dbb95c6d6cf7a30800
+            <file>file:/home/o/oukkaly/NetBeansProjects/3Dtux/src/game/Dico.java</file>
+            <file>file:/home/o/oukkaly/NetBeansProjects/3Dtux/src/game/Position.java</file>
+            <file>file:/home/o/oukkaly/NetBeansProjects/3Dtux/src/game/Letter.java</file>
+            <file>file:/home/o/oukkaly/NetBeansProjects/3Dtux/src/game/JeuDevineLeMotOrdre.java</file>
         </group>
     </open-files>
 </project-private>

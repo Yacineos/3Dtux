@@ -5,8 +5,11 @@
 package game;
 
 import env3d.Env;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -18,40 +21,51 @@ public abstract class Jeu {
     private Room room ; 
     private Profil profil;
     private ArrayList<Letter> lettres;
+    private ArrayList<Position> listPositionLettres ;
     private Dico dico; 
     private Tux tux;
     
-    public Jeu(){ 
+    public Jeu() throws ParserConfigurationException, SAXException, IOException{ 
         // Crée un nouvel environnement
+       
         env = new Env();
 
         // Instancie une Room
         room = new Room();
-
+        
         // Règle la camera
         env.setCameraXYZ(50, 60, 175);
         env.setCameraPitch(-20);
 
         // Désactive les contrôles par défaut
         env.setDefaultControl(false);
-
+        
         // Instancie un profil par défaut
         profil = new Profil();
+        dico = new Dico("");
+        dico.lireDictionnaireDOM("src/partie_XML/","dico.xml" );
+
+        String mot = dico.getMotDepuisListNiveaux(1);
+        System.out.println(""+mot);
         
+        listPositionLettres = new ArrayList<>();
         lettres = new ArrayList<>();
         
-        dico = new Dico("src/partie_XML/actes.xml");
         
-        Letter letterN = new Letter('n',30.0,20.0,env , room);
-        lettres.add(letterN);
-        Letter letterI = new Letter('i',50,20.0,env , room);
-        lettres.add(letterI);
-        Letter letterA = new Letter('a',95,20.0,env , room);
-        lettres.add(letterA  );
-        Letter letterSpace = new Letter(' ',10,40.0,env , room);
-        lettres.add(letterSpace );
+        fillLettersPositionList(mot.length());
+        
+        
+        for(int i = 0 ; i < mot.length(); i++){
+            Letter l = new Letter(mot.charAt(i), listPositionLettres.get(i).getX(), listPositionLettres.get(i).getY(), env, room);
+            lettres.add(l);
+        }
+        
+        
+        printList(listPositionLettres);
+        
+      
+        
     }
-    
     public void execute() {
  
         // pour l'instant, nous nous contentons d'appeler la méthode joue comme cela
@@ -155,12 +169,52 @@ public abstract class Jeu {
         return distance(letter) < 10.0 ;
     }
     
-    protected void nextRandomPosition(){
+    
+    
+    protected void fillLettersPositionList(int nbLetters){
+        
+        // on va créer des position random pour toutes les lettres + l'objet tux 
+        for(int i = 0 ; i < nbLetters+1 ; i++){
+            boolean done = false ;
+            //on génère une position random
+            Position p = generateRandomCoor(this.room.getWidth() , this.room.getDepth()) ;
+            //System.out.println("on est pas entré dans la boucle "+ p.toString());
+            // TantQue la position générée est dans la liste on en génère une autre 
+            while(!done){
+                //System.out.println("on est entré dans la boucle "+ p.toString());
+                if(distanceEntreLeResteDesLettres(p)){
+                    //System.out.println("est ce que la position :"+p.toString()+" est dans la liste :"+listPositionLettres.contains(p));
+                    this.listPositionLettres.add(p);
+                    done = true ;
+                }else{
+                    p = generateRandomCoor(this.room.getWidth() , this.room.getDepth()) ;
+                    //System.out.println("ohhh je genere une nouvelle :"+p.toString()+" est dans la liste ");
+
+                }
+            }
+        }
         
     }
+    private boolean distanceEntreLeResteDesLettres(Position p){
+        boolean estEnCollisionAvecUneAutreLettre = false ;
+        int i = 0 ;
+        while(i < listPositionLettres.size() && !listPositionLettres.get(i).samePosition(p)){
+            i++;
+        }
+        return  !(i < listPositionLettres.size()) ;
+    }
+    // generates a random coordonates that are between (0 and maxX ) && ( 0 and maxY)
+    protected Position generateRandomCoor(int maxX , int maxY){
+        Position p = new Position();
+        p.setY((Math.random()*1000) % (maxY-20));
+        p.setX((Math.random()*1000) % (maxX-20));
+        return p;
+    }
     
-    protected double generateRandomCoor(int coor1 , int coor2){
-        return Math.random();
+    private void printList(ArrayList<Position> list){
+        for(int i = 0 ; i < list.size() ; i++){
+            System.out.println(" ->"+list.get(i).toString());
+        }
     }
     
     
