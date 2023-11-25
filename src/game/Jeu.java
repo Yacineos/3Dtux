@@ -17,7 +17,7 @@ import org.xml.sax.SAXException;
  */
 public abstract class Jeu {
     
-    private Env env ;
+    protected Env env ;
     private Room room ; 
     private Profil profil;
     private ArrayList<Letter> lettres;
@@ -105,6 +105,8 @@ public abstract class Jeu {
 
         
         while (!finished) {
+            
+            env.setCameraXYZ(this.tux.getX(), 60, this.tux.getZ()+100);
  
             // Contrôles globaux du jeu (sortie, ...)
             //1 is for escape key

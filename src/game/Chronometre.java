@@ -52,23 +52,33 @@ public class Chronometre {
        return timeSpent<this.limite;
     }
     
+     // Optionnel : 
+    public boolean remains15sec(){
+        current = System.currentTimeMillis();
+        int timeSpent;
+        timeSpent = (int) ((limite - (current-this.begin)/1000));
+       return timeSpent<15;
+    }
+    
     public static void main(String[] args) throws InterruptedException{
-       Chronometre chrono = new Chronometre(10); 
+       Chronometre chrono = new Chronometre(20); 
        chrono.start();
        TimeUnit.SECONDS.sleep(2);
+       System.out.println(""+chrono.remains15sec());
        TimeUnit.SECONDS.sleep(2);
        TimeUnit.SECONDS.sleep(2);
-       System.out.println(""+chrono.remainsTime());
+       System.out.println(""+chrono.remains15sec());
+
        TimeUnit.SECONDS.sleep(2);
        chrono.stop();
        System.out.println(""+chrono.getTime());
        System.out.println(""+chrono.getHours()+":"+chrono.getMinutes()+":"+chrono.getSeconds());
 
-       System.out.println(""+chrono.remainsTime());
+       System.out.println(""+chrono.remains15sec());
        TimeUnit.SECONDS.sleep(2);
        
        TimeUnit.SECONDS.sleep(2);
-       System.out.println(""+chrono.remainsTime());
+       System.out.println(""+chrono.remains15sec());
 
        
        

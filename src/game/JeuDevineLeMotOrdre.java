@@ -30,24 +30,45 @@ import org.xml.sax.SAXException;
         //Le constructeur de cette classe devra appeler le constructeur de la classe de base Jeu.
         public JeuDevineLeMotOrdre() throws ParserConfigurationException, SAXException, IOException{
             super();
-            this.nbLettersRestantes = super.getLettres().size();
-            System.out.println(""+nbLettersRestantes);
         }
 
         protected void demarrepartie(Partie partie){
-
+            //Le chronomètre soit initialisé en début de partie (démarrePartie)
+            this.chrono = new Chronometre(partie.getLimiteTempsEnSecondes());
+            //on lance le chrono 
+            this.chrono.start();
+            this.nbLettersRestantes = super.getLettres().size();
+            
         }
         protected void appliqueRegles(Partie partie){
-            if(tuxTrouveLettre()){
-                this.nbLettersRestantes--;
-                System.out.println(""+this.nbLettersRestantes);
+            //puis utilisé pour arrêter le jeu au bout d'un temps limité
+            if(nbLettersRestantes > 0){
+                if(tuxTrouveLettre()){
+                    this.nbLettersRestantes--;
+                    System.out.println(""+this.nbLettersRestantes);
+                }
+            }else{
+                terminePartie(partie);            }
+            // Optionnel : 
+            /*
+            if(this.chrono.remains15sec()){
+               this.env.soundPlay("sounds/NoNoNo.wav");
             }
+            */
         }
         protected void terminePartie(Partie partie){
-
+            //Si le mot est déterminé avant le temps limité, 
+            //alors le temps qui a été nécessaire pour le trouver est enregistré 
+            //dans la partie en cours (terminePartie).
+            this.chrono.stop();
+            if(this.chrono.remainsTime()){
+                partie.setTrouve(this.nbLettersRestantes);
+                partie.setTemps(this.chrono.getSeconds());
+            }
         }
         //tuxTrouveLettre() : Boolean
-        // renvoie true si la première lettre de la liste de lettres (restantes) du mot est en contact avec le personnage tux.
+        // renvoie true si la première lettre de la liste de lettres (restantes)
+        //du mot est en contact avec le personnage tux.
         private boolean tuxTrouveLettre(){
             boolean res = false;
 
@@ -65,7 +86,7 @@ import org.xml.sax.SAXException;
         }
 
         private int getTemps(){
-            return 0 ;
+            return (int)this.chrono.getTime();
         }
 
 
