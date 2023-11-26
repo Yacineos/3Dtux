@@ -4,17 +4,19 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Room.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/test/test/TestDico.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/EnvTextMap.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Partie.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Tux.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Chronometre.java</file>
             <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Dico.java</file>
             <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Position.java</file>
             <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Jeu.java</file>
             <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/LanceurDeJeu.java</file>
             <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Profil.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/test/test/TestDico.java</file>
             <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/JeuDevineLeMotOrdre.java</file>
             <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Letter.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Partie.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Tux.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Chronometre.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/EnvText.java</file>
         </group>
     </open-files>
 </project-private>

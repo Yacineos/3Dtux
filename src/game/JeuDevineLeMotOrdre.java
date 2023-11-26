@@ -32,7 +32,7 @@ import org.xml.sax.SAXException;
             super();
         }
 
-        protected void demarrepartie(Partie partie){
+        protected void demarrePartie(Partie partie){
             //Le chronomètre soit initialisé en début de partie (démarrePartie)
             this.chrono = new Chronometre(partie.getLimiteTempsEnSecondes());
             //on lance le chrono 
@@ -40,7 +40,7 @@ import org.xml.sax.SAXException;
             this.nbLettersRestantes = super.getLettres().size();
             
         }
-        protected boolean appliqueRegles(Partie partie){
+        protected void appliqueRegles(Partie partie){
             System.out.println(this.chrono.getActualTime());
             //puis utilisé pour arrêter le jeu au bout d'un temps limité
             if(nbLettersRestantes > 0){
@@ -48,10 +48,10 @@ import org.xml.sax.SAXException;
                     this.nbLettersRestantes--;
                     System.out.println(""+this.nbLettersRestantes);
                 }
-                return false ;
+                
             }else{
                 this.chrono.stop();
-                return true ;
+                
             }
             // Optionnel : 
             /*
@@ -92,7 +92,6 @@ import org.xml.sax.SAXException;
         private int getTemps(){
             return (int)this.chrono.getTime();
         }
-
 
 
     }
