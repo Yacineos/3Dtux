@@ -20,7 +20,7 @@ public class Tux extends EnvNode{
     public Tux(Env env , Room room){
         this.env = env ;
         this.room = room ;
-        setScale(16.0);
+        setScale(6.0);
         setX(room.getWidth()/2);// positionnement au milieu de la largeur de la room
         setY(getScale() * 1.1); // positionnement en hauteur basé sur la taille de Tux
         setZ(room.getDepth()/2); // positionnement au milieu de la profondeur de la room

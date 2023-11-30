@@ -40,17 +40,20 @@ import org.xml.sax.SAXException;
             this.nbLettersRestantes = super.getLettres().size();
             
         }
-        protected void appliqueRegles(Partie partie){
-            System.out.println(this.chrono.getActualTime());
+        
+        protected boolean appliqueRegles(Partie partie){
+            //System.out.println(this.chrono.getActualTime());
             //puis utilisé pour arrêter le jeu au bout d'un temps limité
             if(nbLettersRestantes > 0){
                 if(tuxTrouveLettre()){
                     this.nbLettersRestantes--;
-                    System.out.println(""+this.nbLettersRestantes);
+                    System.out.println(""+this.chrono.getActualTime());
+                    
                 }
-                
+                return true;
             }else{
                 this.chrono.stop();
+                return false ;
                 
             }
             // Optionnel : 
@@ -65,9 +68,13 @@ import org.xml.sax.SAXException;
             //alors le temps qui a été nécessaire pour le trouver est enregistré 
             //dans la partie en cours (terminePartie).
             
+            partie.setTrouve(this.nbLettersRestantes);
+            partie.setTemps(this.chrono.getSeconds());
             if(this.chrono.remainsTime()){
-                partie.setTrouve(this.nbLettersRestantes);
-                partie.setTemps(this.chrono.getSeconds());
+                
+                System.out.println("Félicitations votre temps est de : "+ partie.getTemps());
+            }else{ 
+                System.out.println("Dommage vous pouvez faire mieux votre temps est de : "+ partie.getTemps());
             }
         }
         //tuxTrouveLettre() : Boolean

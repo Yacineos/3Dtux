@@ -7,12 +7,20 @@ package game;
 
 import env3d.Env;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import org.lwjgl.input.Keyboard;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 /**
@@ -20,6 +28,8 @@ import org.xml.sax.SAXException;
  * @author gladen
  */
 public abstract class Jeu {
+
+    
 
     enum MENU_VAL {
         MENU_SORTIE, MENU_CONTINUE, MENU_JOUE
@@ -29,6 +39,7 @@ public abstract class Jeu {
     private ArrayList<Letter> lettres;
     private ArrayList<Position> listPositionLettres ;
     private String mot ;
+    private int niveau ;
     private final Dico dico;
     private Tux tux;
     private final Room mainRoom;
@@ -82,36 +93,148 @@ public abstract class Jeu {
         menuText = new EnvTextMap(env);
         
         // Textes affichés à l'écran
+        valeursPossibleTextAfficheEcran();
+
+    }
+    
+    private void valeursPossibleTextAfficheEcran(){
+        //menu Principal
         menuText.addText("Voulez vous ?", "Question", 200, 300);
         menuText.addText("1. Commencer une nouvelle partie ?", "Jeu1", 250, 280);
         menuText.addText("2. Charger une partie existante ?", "Jeu2", 250, 260);
         menuText.addText("3. Sortir de ce jeu ?", "Jeu3", 250, 240);
         menuText.addText("4. Quitter le jeu ?", "Jeu4", 250, 220);
+        // 3 eme page
         menuText.addText("Choisissez un nom de joueur : ", "NomJoueur", 200, 300);
+        // 4 eme page si création de nouveau profile
+        menuText.addText("Entrez votre date de naissance au format ddmmyyyy: ", "Anniversaire", 120, 300);
+        // 2 eme page
         menuText.addText("1. Charger un profil de joueur existant ?", "Principal1", 250, 280);
         menuText.addText("2. Créer un nouveau joueur ?", "Principal2", 250, 260);
         menuText.addText("3. Sortir du jeu ?", "Principal3", 250, 240);
+        // menu Jeu
+        menuText.addText("Choisissez une difficulte : ", "Difficulte", 200, 300);
+        menuText.addText("- Niveau 1 ", "Niveau1", 250, 280);
+        menuText.addText("- Niveau 2 ", "Niveau2", 250, 260);
+        menuText.addText("- Niveau 3 ", "Niveau3", 250, 240);
+        menuText.addText("- Niveau 4 ", "Niveau4", 250, 220);
+        menuText.addText("- Niveau 5 ", "Niveau5", 250, 200);
+        
+        
+    }
+    private void addTextMotATrouver(String mot){
+        // ajout de l'affichage du mot à trouver
+        menuText.addText("Le mot à trouver c'est : ", "motATrouver", 250, 280);
+        menuText.addText(mot, "mot", 250, 240);
+    }
     
-        
-        this.mot = dico.getMotDepuisListNiveaux(1);
-        System.out.println(""+mot);
-        
-        
-        listPositionLettres = new ArrayList<>();
-        lettres = new ArrayList<>();
-        
-        
-        fillLettersPositionList(mot.length());
-        
-        for(int i = 0 ; i < mot.length(); i++){
-            Letter l = new Letter(mot.charAt(i), listPositionLettres.get(i).getX(), listPositionLettres.get(i).getY(), env, mainRoom);
-            lettres.add(l);
+    private void addTextCinqDernieresParties(ArrayList<Partie> cinqDernieresPartiesDuJoueur){
+        menuText.addText("Choisissez une Partie : ", "ChoixPartie", 200, 300);
+        // la plus récente
+        for(int i = 0 ; i < cinqDernieresPartiesDuJoueur.size() ; i++ ){
+            menuText.addText(""+(i+1)+"- "+cinqDernieresPartiesDuJoueur.get(cinqDernieresPartiesDuJoueur.size()-(i+1)).getDate()+" time :" +cinqDernieresPartiesDuJoueur.get(cinqDernieresPartiesDuJoueur.size()-(i+1)).getTemps(), "Partie"+(i+1), 250, 280-(20*i));
         }
-        
-        printList(listPositionLettres);
+        menuText.addText("-6 RETOUR ", "RetourChoixPartie", 200, 150);
 
+        
+    }
+    
+    private void displayMotATrouver() {
+        menuText.getText("motATrouver").display();
+        menuText.getText("mot").display();
+    }
+    
+    private void displayDesCinqDernieresParties(int nbParties){
+         menuText.getText("ChoixPartie").display();
+         menuText.getText("RetourChoixPartie").display();
+        for(int i = 0 ; i < nbParties ; i++){
+            menuText.getText("Partie"+(i+1)).display();
+        }
+    }
+    private void displayMenuPrincipal(){
+        menuText.getText("Question").display();
+        menuText.getText("Principal1").display();
+        menuText.getText("Principal2").display();
+        menuText.getText("Principal3").display();
+    }
+    
+    private void displayMenuJeu(){
+        menuText.getText("Question").display();
+        menuText.getText("Jeu1").display();
+        menuText.getText("Jeu2").display();
+        menuText.getText("Jeu3").display();
+        menuText.getText("Jeu4").display();
+    }
+    private void cleanDesCinqDernieresParties(int nbParties){
+        menuText.getText("ChoixPartie").clean();
+        for(int i = 0 ; i < nbParties ; i++){
+            menuText.getText("Partie"+(i+1)).clean();
+        }
+         menuText.getText("RetourChoixPartie").clean();
+    }
+    
+    private void displayChoixNiveau(){
+        menuText.getText("Difficulte").display();
+        menuText.getText("Niveau1").display();
+        menuText.getText("Niveau2").display();
+        menuText.getText("Niveau3").display();
+        menuText.getText("Niveau4").display();
+        menuText.getText("Niveau5").display();
+    }
+    
+    private void cleanMenuPrincipal(){
+        menuText.getText("Question").clean();
+        menuText.getText("Principal1").clean();
+        menuText.getText("Principal2").clean();
+        menuText.getText("Principal3").clean();
+    }
+    
+    private void cleanMenuJeu(){
+        menuText.getText("Question").clean();
+        menuText.getText("Jeu1").clean();
+        menuText.getText("Jeu2").clean();
+        menuText.getText("Jeu3").clean();
+        menuText.getText("Jeu4").clean();
+    }
+    private void cleanChoixNiveau(){
+        menuText.getText("Difficulte").clean();
+        menuText.getText("Niveau1").clean();
+        menuText.getText("Niveau2").clean();
+        menuText.getText("Niveau3").clean();
+        menuText.getText("Niveau4").clean();
+        menuText.getText("Niveau5").clean();
+    }
+    private void cleanMotATrouver(){
+        menuText.getText("motATrouver").clean();
+        menuText.getText("mot").clean();
     }
 
+    
+    private int getChoixToucheAppuyeeTroisChoix(){
+        int res = 0;
+        while (!(res == Keyboard.KEY_1 || res == Keyboard.KEY_2 || res == Keyboard.KEY_3 )) {
+                res = env.getKey();
+                env.advanceOneFrame();
+            }
+        return res ;
+    }
+    private int getChoixToucheAppuyeeQuatreChoix(){
+        int res = 0;
+        while (!(res == Keyboard.KEY_1 || res == Keyboard.KEY_2 || res == Keyboard.KEY_3 || res == Keyboard.KEY_4)) {
+                res = env.getKey();
+                env.advanceOneFrame();
+            }
+        return res ;
+    }
+    private int getChoixToucheAppuyeeCinqChoix(){
+        int res = 0;
+        while (!(res == Keyboard.KEY_1 || res == Keyboard.KEY_2 || res == Keyboard.KEY_3 || res == Keyboard.KEY_4 || res == Keyboard.KEY_5)) {
+            res = env.getKey();
+            env.advanceOneFrame();
+        }
+        return res ;
+    }
+    
     /**
      * Gère le menu principal
      *
@@ -121,7 +244,11 @@ public abstract class Jeu {
         MENU_VAL mainLoop;
         mainLoop = MENU_VAL.MENU_SORTIE;
         do {
-            mainLoop = menuPrincipal();
+            try {
+                mainLoop = menuPrincipal();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Jeu.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } while (mainLoop != MENU_VAL.MENU_SORTIE);
         this.env.setDisplayStr("Au revoir !", 300, 30);
         env.exit();
@@ -136,10 +263,18 @@ public abstract class Jeu {
         menuText.getText("NomJoueur").clean();
         return nomJoueur;
     }
+    // fourni
+    private String getAnniversaire() {
+        String anniversaire = "";
+        menuText.getText("Anniversaire").display();
+        anniversaire = menuText.getText("Anniversaire").lire(true);
+        menuText.getText("Anniversaire").clean();
+        return anniversaire;
+    }
 
     
     // fourni, à compléter
-    private MENU_VAL menuJeu() {
+    private MENU_VAL menuJeu() throws InterruptedException {
 
         MENU_VAL playTheGame;
         playTheGame = MENU_VAL.MENU_JOUE;
@@ -147,29 +282,18 @@ public abstract class Jeu {
         do {
             // restaure la room du menu
             env.setRoom(menuRoom);
-            // affiche menu
-            menuText.getText("Question").display();
-            menuText.getText("Jeu1").display();
-            menuText.getText("Jeu2").display();
-            menuText.getText("Jeu3").display();
-            menuText.getText("Jeu4").display();
+           
+            // affiche le menu du jeu
+            displayMenuJeu();
             
             // vérifie qu'une touche 1, 2, 3 ou 4 est pressée
-            int touche = 0;
-            while (!(touche == Keyboard.KEY_1 || touche == Keyboard.KEY_2 || touche == Keyboard.KEY_3 || touche == Keyboard.KEY_4)) {
-                touche = env.getKey();
-                env.advanceOneFrame();
-            }
+            int touche = getChoixToucheAppuyeeQuatreChoix();
+            
 
             // nettoie l'environnement du texte
-            menuText.getText("Question").clean();
-            menuText.getText("Jeu1").clean();
-            menuText.getText("Jeu2").clean();
-            menuText.getText("Jeu3").clean();
-            menuText.getText("Jeu4").clean();
+            cleanMenuJeu();
 
-            // restaure la room du jeu
-            env.setRoom(mainRoom);
+           
 
             // et décide quoi faire en fonction de la touche pressée
             switch (touche) {
@@ -177,13 +301,47 @@ public abstract class Jeu {
                 // Touche 1 : Commencer une nouvelle partie
                 // -----------------------------------------                
                 case Keyboard.KEY_1: // choisi un niveau et charge un mot depuis le dico
+                    displayChoixNiveau();
+                    //System.out.println("on est içi");
+                    // vérifie qu'une touche 1, 2, 3 ,4 ou 5 est pressée
+                    int touche2 = getChoixToucheAppuyeeCinqChoix();
+                    
+                    // remplie this.mot depuis le dico suivant le choix du niveau 
+                    getMotDepuisListNiveauxSuivantTouchePressee(touche2);
+                  
+                    // clean l'écran des niveaux affichées
+                    cleanChoixNiveau();
+                    
+                    System.out.println(""+mot);
+                    
+                    // génère des positions aléatoires et place les lettres dans la map 
+                    
+                    genererLettresMotRandomPosition();
+                    
                     // .......... dico.******
-                    // crée un nouvelle partie
-                    partie = new Partie("2018-09-7", "test", 1);
+                    addTextMotATrouver(mot);
+                    
+                    displayMotATrouver();
+                    
+                    env.advanceOneFrame();
+                    TimeUnit.SECONDS.sleep(5);
+                    env.advanceOneFrame();
+                    
+                    cleanMotATrouver();
+                    
+                    env.setRoom(mainRoom);
+                    
+                    // crée la date d'aujourd'hui au format yyyy-mm-dd
+                    String datePartieFraichementCree = getCurrentDate();
+                    // crée un nouvelle partie avec la date du jour ou la partie est crée , avec le mot parsé aléatoirement et avec le niveau qui correspond au mot 
+                    partie = new Partie(datePartieFraichementCree, mot,niveau);
                     // joue
                     joue(partie);
                     // enregistre la partie dans le profil --> enregistre le profil
-                    // .......... profil.******
+                    
+                    profil.ajoueterPartie(partie);
+                    profil.sauvegarder(profil.getNom());
+
                     playTheGame = MENU_VAL.MENU_JOUE;
                     break;
 
@@ -191,11 +349,86 @@ public abstract class Jeu {
                 // Touche 2 : Charger une partie existante
                 // -----------------------------------------                
                 case Keyboard.KEY_2: // charge une partie existante
-                    partie = new Partie("2018-09-7", "test", 1); //XXXXXXXXX
-                    // Recupère le mot de la partie existante
-                    // ..........
-                    // joue
-                    joue(partie);
+                    
+                        // trouve le fichier xml correspondant au nom de joueur
+                        //Document docXmlProfilJoueur = this.profil.fromXML(mot);
+                        
+                        //récupérer toutes les parties du joueurs 
+                        ArrayList<Partie> partiesJoueur =  this.profil.getParties();
+                        // récupère les 5 dernières parties 
+                        ArrayList<Partie> cinqsDernieresParties = getCinqDernieresParties(partiesJoueur );
+                        
+                        // afficher à l'écran toutes les parties 
+                        addTextCinqDernieresParties(cinqsDernieresParties);
+                        displayDesCinqDernieresParties(cinqsDernieresParties.size());
+                        // donner la main à l'utilisateur pour séléctionner
+                        // vérifie qu'une touche 1, 2, 3 ou 4 est pressée
+                        int touche3 = getChoixToucheAppuyeeCinqChoix();
+
+                        // charger la partie choisie
+                        //si il y a au moins 1 partie 
+                        if(cinqsDernieresParties.size()>0){
+                            switch(touche3){
+                                case Keyboard.KEY_1:
+                                    partie = cinqsDernieresParties.get(cinqsDernieresParties.size()-1);
+                                   
+                                    break;
+                                case Keyboard.KEY_2:
+                                    partie = cinqsDernieresParties.get(cinqsDernieresParties.size()-2);
+                                    break;
+                                case Keyboard.KEY_3:
+                                    partie = cinqsDernieresParties.get(cinqsDernieresParties.size()-3);
+                                    break;
+                                case Keyboard.KEY_4:
+                                    partie = cinqsDernieresParties.get(cinqsDernieresParties.size()-4);
+                                    break;
+                                case Keyboard.KEY_5:
+                                    partie = cinqsDernieresParties.get(cinqsDernieresParties.size()-5);
+                                    break;
+                                default :
+                                     partie = new Partie(getCurrentDate(),"tate",1);
+                                    break;
+                            }
+                            
+                            
+                            this.mot= partie.getMot();
+                            
+                            
+                            
+                             // génère des positions aléatoires et place les lettres dans la map 
+                    
+                            genererLettresMotRandomPosition();
+                            
+                            cleanDesCinqDernieresParties(cinqsDernieresParties.size());
+
+                            // .......... dico.******
+                            addTextMotATrouver(mot);
+
+                            displayMotATrouver();
+
+                            env.advanceOneFrame();
+                            TimeUnit.SECONDS.sleep(5);
+                            env.advanceOneFrame();
+
+                            cleanMotATrouver();
+
+                            env.setRoom(mainRoom);
+                            
+                            // crée la date d'aujourd'hui au format yyyy-mm-dd
+                            datePartieFraichementCree = getCurrentDate();
+                            // crée un nouvelle partie avec la date du jour ou la partie est crée , avec le mot parsé aléatoirement et avec le niveau qui correspond au mot 
+                            partie.setDate(datePartieFraichementCree);
+                            
+                            // on joue à la partie rechargé
+                            joue(partie);
+                            
+                            profil.ajoueterPartie(partie);
+                            profil.sauvegarder(profil.getNom());
+                            
+                        }
+                        
+                        
+                       
                     // enregistre la partie dans le profil --> enregistre le profil
                     // .......... profil.******
                     playTheGame = MENU_VAL.MENU_JOUE;
@@ -207,7 +440,7 @@ public abstract class Jeu {
                 case Keyboard.KEY_3:
                     playTheGame = MENU_VAL.MENU_CONTINUE;
                     break;
-
+                    
                 // -----------------------------------------
                 // Touche 4 : Quitter le jeu
                 // -----------------------------------------                
@@ -215,33 +448,25 @@ public abstract class Jeu {
                     playTheGame = MENU_VAL.MENU_SORTIE;
             }
         } while (playTheGame == MENU_VAL.MENU_JOUE);
+        
         return playTheGame;
     }
 
-    private MENU_VAL menuPrincipal() {
+    private MENU_VAL menuPrincipal() throws InterruptedException {
 
         MENU_VAL choix = MENU_VAL.MENU_CONTINUE;
         String nomJoueur;
+        String anniversaire;
 
         // restaure la room du menu
         env.setRoom(menuRoom);
 
-        menuText.getText("Question").display();
-        menuText.getText("Principal1").display();
-        menuText.getText("Principal2").display();
-        menuText.getText("Principal3").display();
+        displayMenuPrincipal();
                
         // vérifie qu'une touche 1, 2 ou 3 est pressée
-        int touche = 0;
-        while (!(touche == Keyboard.KEY_1 || touche == Keyboard.KEY_2 || touche == Keyboard.KEY_3)) {
-            touche = env.getKey();
-            env.advanceOneFrame();
-        }
+        int touche = getChoixToucheAppuyeeTroisChoix();
 
-        menuText.getText("Question").clean();
-        menuText.getText("Principal1").clean();
-        menuText.getText("Principal2").clean();
-        menuText.getText("Principal3").clean();
+        cleanMenuPrincipal();
 
         // et décide quoi faire en fonction de la touche pressée
         switch (touche) {
@@ -249,19 +474,29 @@ public abstract class Jeu {
             // Touche 1 : Charger un profil existant
             // -------------------------------------
             case Keyboard.KEY_1:
-                // demande le nom du joueur existant
-                nomJoueur = getNomJoueur();
-                // charge le profil de ce joueur si possible
-                /*
-                if (profil.charge(nomJoueur)) {
-                    choix = menuJeu();
-                } else {
-                    
-                    choix = MENU_VAL.MENU_SORTIE;//CONTINUE;
-                }
-                */
-                //bricolage
-                choix = MENU_VAL.MENU_SORTIE;//CONTINUE;
+                // est ce qu'on a trouvé un profil ?
+                boolean success = false ;
+                // tant que le profil entré n'est pas bon on redemande un autre profil
+                do{
+                    // demande le nom du joueur existant
+                    nomJoueur = getNomJoueur();
+                    // charge le profil de ce joueur si possible
+
+                    try{
+                        this.profil = new Profil(nomJoueur);
+                        success= true ;
+                    }catch(Exception e){
+                        System.out.println("ligne 475 Jeu"+e);
+                        success = false ;
+                    }
+                    if (success) {
+                        choix = menuJeu();
+                    } else {
+
+                        choix = MENU_VAL.MENU_SORTIE;//CONTINUE;
+                    }
+
+                }while(!success);
                 break;
 
             // -------------------------------------
@@ -270,10 +505,20 @@ public abstract class Jeu {
             case Keyboard.KEY_2:
                 // demande le nom du nouveau joueur
                 nomJoueur = getNomJoueur();
-                // crée un profil avec le nom d'un nouveau joueur
-                //profil = new Profil(nomJoueur);
-                profil = new Profil();
-                choix = menuJeu();
+                env.advanceOneFrame();
+                // demander l'anniversaire et vérifier le input
+                do{    
+                    anniversaire = getAnniversaire();
+                    System.out.println(""+anniversaire);
+                    env.advanceOneFrame();
+                }while(!isValidDate(anniversaire) || anniversaire.length()!=8);
+                    
+                    profil = new Profil(nomJoueur,formatDateString(anniversaire));
+                try{
+                    choix = menuJeu();
+                }catch(Exception e){
+                    System.out.println(""+e);
+                }
                 break;
 
             // -------------------------------------
@@ -291,8 +536,9 @@ public abstract class Jeu {
         tux = new Tux(env, mainRoom);
         env.addObject(tux);
 
-        Arrays.asList(this.lettres.get(0), this.lettres.get(1), this.lettres.get(2), this.lettres.get(3)).forEach(env::addObject);
-
+        for(int i = 0 ; i < this.mot.length() ; i++){
+            env.addObject(lettres.get(i));
+        }
 
         // Ici, on peut initialiser des valeurs pour une nouvelle partie
         demarrePartie(partie);
@@ -300,26 +546,25 @@ public abstract class Jeu {
         // Boucle de jeu
         Boolean finished;
         finished = false;
-        while (!finished) {
+        while (!(env.getKey() == 1) && appliqueRegles(partie)) {
             
             env.setCameraXYZ(this.tux.getX(), 60, this.tux.getZ()+100);
 
             // Contrôles globaux du jeu (sortie, ...)
             //1 is for escape key
-            if (env.getKey() == 1) {
-                finished = true;
-            }
+            
 
             // Contrôles des déplacements de Tux (gauche, droite, ...)
             tux.deplace();
 
             // Ici, on applique les regles
-            appliqueRegles(partie);
+            
 
             // Fait avancer le moteur de jeu (mise à jour de l'affichage, de l'écoute des événements clavier...)
             env.advanceOneFrame();
         }
 
+        
         // Ici on peut calculer des valeurs lorsque la partie est terminée
         terminePartie(partie);
 
@@ -327,7 +572,7 @@ public abstract class Jeu {
 
     protected abstract void demarrePartie(Partie partie);
 
-    protected abstract void appliqueRegles(Partie partie);
+    protected abstract boolean appliqueRegles(Partie partie);
 
     protected abstract void terminePartie(Partie partie);
     
@@ -410,5 +655,130 @@ public abstract class Jeu {
         for(int i = 0 ; i < list.size() ; i++){
             System.out.println(" ->"+list.get(i).toString());
         }
+    }
+    
+    
+    private boolean isValidDate(String date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+        dateFormat.setLenient(false);
+
+        try {
+            Date parsedDate = dateFormat.parse(date);
+            return true;
+        } catch (ParseException e) {
+           return false;
+        }
+    }
+    
+    private String formatDateString(String inputDate) {
+        // Assuming inputDate is in the format "ddmmyyyy"
+        return inputDate.substring(0, 2) + "/" + inputDate.substring(2, 4) + "/" + inputDate.substring(4);
+    }
+    
+    // récupère les 5 dernieres parties parmi une liste de parties
+    private ArrayList<Partie> getCinqDernieresParties(ArrayList<Partie> toutesLesPartiesDuJoueur){
+        ArrayList<Partie> cinqsDernieresParties ;
+        //récupérer les que 5 dernières parties 
+        if(toutesLesPartiesDuJoueur.size() > 5){
+            // Obtenir une sous-liste des 5 dernières parties
+            cinqsDernieresParties = new ArrayList<>(toutesLesPartiesDuJoueur.subList(toutesLesPartiesDuJoueur.size() - 5, toutesLesPartiesDuJoueur.size()));
+        }else{
+            // on fait rien sinon
+            cinqsDernieresParties = toutesLesPartiesDuJoueur;
+        }
+        return cinqsDernieresParties;
+    }
+
+    private void getMotDepuisListNiveauxSuivantTouchePressee(int touche){
+        switch(touche){
+            case Keyboard.KEY_1:
+                this.mot = dico.getMotDepuisListNiveaux(1);
+                this.niveau = 1 ;
+                break ;
+            case Keyboard.KEY_2:
+                this.mot = dico.getMotDepuisListNiveaux(2);
+                this.niveau = 2 ;
+                break ;
+            case Keyboard.KEY_3:
+                this.mot = dico.getMotDepuisListNiveaux(3);
+                this.niveau = 3 ;
+                break ;
+            case Keyboard.KEY_4:
+                this.mot = dico.getMotDepuisListNiveaux(4);
+                this.niveau = 4 ;
+                break ;
+            case Keyboard.KEY_5:
+                this.mot = dico.getMotDepuisListNiveaux(5);
+                this.niveau = 5 ;
+                break ;
+            default :
+                break ;
+        }
+    }
+
+    /*
+     * genère des positions aléatoires et Déclare les lettres du this.mot suivant ces positions
+    **/
+    private void genererLettresMotRandomPosition(){
+        listPositionLettres = new ArrayList<>();
+        lettres = new ArrayList<>();
+
+        // remplie une array list de positions aléatoirement générées 
+        fillLettersPositionList(this.mot.length());
+
+        // rajoute les lettres dans la arraylist this.letters
+        for(int i = 0 ; i < mot.length(); i++){
+            Letter l = new Letter(this.mot.charAt(i), listPositionLettres.get(i).getX(), listPositionLettres.get(i).getY(), env, mainRoom);
+            lettres.add(l);
+        }
+    }
+    
+    /*
+     *Method to get the current date in the format "yyyy-MM-dd"
+    */
+    private String getCurrentDate() {
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return currentDate.format(formatter);
+    }
+    
+// test purpose
+
+    public static void main(String[] args) {
+       /*
+        // Création d'un profil avec quelques parties
+        Profil profil = new Profil("NomDuJoueur", "01/01/2000");
+        profil.ajoueterPartie(new Partie("01/01/2021", "Mot1", 1));
+        profil.ajoueterPartie(new Partie("01/01/2021", "Mot2", 2));
+        profil.ajoueterPartie(new Partie("01/01/2021", "Mot3", 3));
+        profil.ajoueterPartie(new Partie("01/01/2021", "Mot4", 4));
+        profil.ajoueterPartie(new Partie("01/01/2021", "Mot5", 5));
+        profil.ajoueterPartie(new Partie("01/01/2021", "Mot6", 4));
+        profil.ajoueterPartie(new Partie("01/01/2021", "Mot11", 1));
+        profil.ajoueterPartie(new Partie("01/01/2021", "Mot22", 2));
+        profil.ajoueterPartie(new Partie("01/01/2021", "Mot33", 3));
+        profil.ajoueterPartie(new Partie("01/01/2021", "Mot43", 4));
+        profil.ajoueterPartie(new Partie("01/01/2021", "Mot54", 5));
+        profil.ajoueterPartie(new Partie("01/01/2021", "Mot65", 4));
+
+        // Récupération de toutes les parties du joueur
+        ArrayList<Partie> partiesJoueur = profil.getParties();
+        ArrayList<Partie> cinqDernieresParties;
+
+        // Récupération des 5 dernières parties
+        if (partiesJoueur.size() > 5) {
+            // Obtenir une sous-liste des 5 dernières parties
+            cinqDernieresParties = new ArrayList<>(partiesJoueur.subList(partiesJoueur.size() - 5, partiesJoueur.size()));
+        } else {
+            // Si le joueur a moins de 5 parties, utiliser toutes les parties disponibles
+            cinqDernieresParties = partiesJoueur;
+        }
+
+        // Affichage des 5 dernières parties (ou toutes les parties si moins de 5)
+        System.out.println("Les 5 dernières parties (ou toutes les parties si moins de 5):");
+        for (Partie partie : cinqDernieresParties) {
+            System.out.println( "Mot: " + partie.getMot() + ", Niveau: " + partie.getNiveau());
+        }
+        */
     }
 }

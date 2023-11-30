@@ -3,20 +3,36 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Room.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/test/test/TestDico.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/EnvTextMap.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Partie.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Tux.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Chronometre.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Dico.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Position.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Jeu.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/LanceurDeJeu.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Profil.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/JeuDevineLeMotOrdre.java</file>
-            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Letter.java</file>
             <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/EnvText.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/EnvTextMap.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/URLUtil.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/partie_XML/profil/z.xml</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/FileUtil.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/LanceurDeJeu.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/partie_XML/xslt/profil.html</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/partie_XML/profil/profil.xml</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/partie_XML/profil/profil.xsl</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/partie_XML/xml/dico.xml</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/partie_XML/profil/profil2.xml</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/partie_XML/profil/tobi.xml</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Partie.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Profil.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Room.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Jeu.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/JeuDevineLeMotOrdre.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/partie_XML/profil/u.xml</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Dico.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/partie_XML/profil/tate.xml</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/partie_XML/TestParserDOM.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/partie_XML/xsd/dico.xsd</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Position.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/partie_XML/dico.xml</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/partie_XML/profil/yacine.xml</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/test/test/TestDico.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Tux.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/BrowserUtil.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/game/Letter.java</file>
+            <file>file:/D:/University/L3_MIAGE/XML/tux3d/3Dtux/src/partie_XML/profil/2.xml</file>
         </group>
     </open-files>
 </project-private>

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+
+<xs:schema version="1.0"
+           targetNamespace="http://myGame/tux"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://myGame/tux"
+           elementFormDefault="qualified">
+    
+<!-- declaration du type complexe dictionnaire -->  
+<xs:element name="dictionnaire" type="Dictionnaire"/>
+  
+      
+<!-- declaration du type complexe dictionnaire -->
+<xs:complexType name="Dictionnaire">
+    <xs:sequence>
+        <xs:element name="difficulte" type="Difficulte" minOccurs="5" maxOccurs="5"/>
+    </xs:sequence>    
+</xs:complexType>
+
+<!-- declaration du type difficulte-->
+<xs:complexType name="Difficulte">
+    <xs:sequence>
+        <xs:element name="mot" type="Mot" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="niveau" type="Niveau"/>
+    
+</xs:complexType>
+
+
+<!-- declaration du type simple niveau qui est un chiffre entre 1 et 5 , 5 designant le plus difficile -->
+<xs:simpleType name="Niveau">
+    <xs:restriction base="xs:int">
+        <xs:minInclusive value="1" />
+        <xs:maxInclusive value="5" />
+    </xs:restriction>
+</xs:simpleType>    
+    
+   
+ <!-- declaration du type simple mot qui est restreint par une expression régulière qui contient au moins 
+    3 lettres et au max 45 lettres(s'il est pas composé) , sinon (il pourra pas dépassé 91 caractères (45lettres - 45 lettres ) 
+    et qui n    e commence pas ni ne finis par -  sachant que les mots composés ne sont pris en compte 
+    que si ils contiennent un tiret , sachant que tous les mots doivent impérativment en minuscule
+    -->
+<!-- [a..z]{3..45}[-]{0..1}[a..z]{0..45} -->
+<xs:simpleType name="Mot">
+    <xs:restriction base ="xs:string">
+       <xs:pattern value="[a-z]{3,45}[-]{0,1}[a-z]{0,45}" />
+    </xs:restriction>
+</xs:simpleType>
+
+</xs:schema>

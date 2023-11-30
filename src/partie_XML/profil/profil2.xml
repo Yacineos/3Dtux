@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+
+<profil xmlns="http://myGame/tux" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://myGame/tux ../xsd/profil.xsd" >
+    <nom>Tristan</nom>
+    <avatar>lada.jpg</avatar>
+    <anniversaire>2001-09-11</anniversaire>
+    <parties>
+        <partie date="2023-10-10">
+            <temps>30.0</temps>
+            <mot>booz</mot>
+            <niveau>1</niveau>
+        </partie>
+        <partie date="2023-09-11" trouvé="55">
+            <mot>aikido</mot>
+            <niveau>2</niveau>
+        </partie>
+        <partie date="2013-09-29">
+            <temps>15.0</temps>
+            <mot>hustelmania</mot>
+            <niveau>4</niveau>
+        </partie>
+    </parties>
+</profil>
