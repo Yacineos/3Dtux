@@ -71,7 +71,6 @@ import org.xml.sax.SAXException;
             partie.setTrouve(this.nbLettersRestantes);
             partie.setTemps(this.chrono.getSeconds());
             if(this.chrono.remainsTime()){
-                
                 System.out.println("Félicitations votre temps est de : "+ partie.getTemps());
             }else{ 
                 System.out.println("Dommage vous pouvez faire mieux votre temps est de : "+ partie.getTemps());

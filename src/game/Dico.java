@@ -4,36 +4,132 @@
  */
 package game;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
 /**
  *
  * @author OUKKAL Yacine
  */
-public class Dico {
+public class Dico extends DefaultHandler {
     private ArrayList<String> listNiveau1 ;
     private ArrayList<String> listNiveau2 ;
     private ArrayList<String> listNiveau3 ;
     private ArrayList<String> listNiveau4 ;
     private ArrayList<String> listNiveau5 ;
     private String cheminFichierDico ;
+    private String currentMot; //tampon une fois le mot construit
+    private int currentNiveau; //tampon niveau
+    private boolean inMot; //flag pour avoir qu'on est dans l'élément
+    private StringBuilder currentValue;//tampon pour construire le mot
     
     // le but du constructeur est d'initialiser les listes à partie du dictionnaire XML 
     public Dico(String cheminFichierDico){
+        super();
         this.cheminFichierDico = cheminFichierDico ;
         this.listNiveau1 = new ArrayList<>();
         this.listNiveau2 = new ArrayList<>();
         this.listNiveau3 = new ArrayList<>();
         this.listNiveau4 = new ArrayList<>();
         this.listNiveau5 = new ArrayList<>();
+        currentValue=new StringBuilder();
+    }
+    
+    @Override
+    public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+        currentValue.setLength(0);
+        if(qName.equals("difficulte")){
+            int niveau=Integer.parseInt(attributes.getValue("niveau"));
+            currentNiveau=niveau;
+        }
+        if(qName.equals("mot")){
+            currentMot = new String();
+            inMot=true;
+        }
+    }
+    /** 
+     * Evenement fin d'un élement: on ajoute le mot construit dans le buffer currentValue ainsi que le niveau en appelant dans
+     * en appelant la méthode ajouteMotADico
+     * @param uri
+     * @param localName
+     * @param qName
+     * @throws SAXException
+     */
+    @Override
+    public void endElement(String uri, String localName, String qName) throws SAXException {
+        if(qName.equals("mot")){
+            currentMot=currentValue.toString();
+            ajoutMotADico(currentNiveau, currentMot);
+            currentMot=null;
+            // currentValue=null;
+            inMot=false;
+        }
+    }
+    
+     /** 
+     * Construction du mot, on concatene le caractère au tampon
+     * @param ch
+     * @param start
+     * @param length
+     * @throws SAXException
+     */
+    @Override
+    public void characters(char[] ch, int start, int length) throws SAXException {
+        // String lecture = new String(ch, start, length);
+        if(inMot){
+            currentValue.append(ch, start, length);
+        }
+        
+    }
+    
+    /** 
+     * @throws SAXException
+     */
+    @Override
+    public void startDocument() throws SAXException {
+        System.out.println("startDocument()");
+    } 
+    
+    /** 
+     * @throws SAXException
+     */
+    @Override
+    public void endDocument() throws SAXException {
+        System.out.println("endDocument()");
+
+    } 
+    
+    /** 
+     * Appel du parser SAX
+     * @param filename
+     * @throws SAXException
+     */
+    public void lireDictionnaireSAX(String filename) throws SAXException{
+        try{
+            SAXParserFactory fabrique = SAXParserFactory.newInstance();
+            SAXParser parseur = fabrique.newSAXParser(); 
+            File fichier = new File(filename); 
+            // DefaultHandler gestionnaire = new PersonneHandler(); 
+            parseur.parse(fichier, this);
+        }
+        catch(Exception e){
+            System.out.println("Error during SAX parsing: " + e.getMessage());
+            e.printStackTrace();
+            System.out.println("Filename: " + filename);
+        }
+        
     }
     
     public String getMotDepuisListNiveaux(int niveau){

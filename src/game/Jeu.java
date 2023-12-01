@@ -79,14 +79,11 @@ public abstract class Jeu {
         dico = new Dico("");
         
         try {
-            dico.lireDictionnaireDOM("src/partie_XML/","dico.xml" );
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(Jeu.class.getName()).log(Level.SEVERE, null, ex);
+            dico.lireDictionnaireSAX("src/partie_XML/dico.xml" );
         } catch (SAXException ex) {
             Logger.getLogger(Jeu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Jeu.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         
 
         // instancie le menuText
