@@ -13,6 +13,9 @@ import org.lwjgl.input.Keyboard;
  *
  * @author oukkaly
  */
+
+// classe qui représente le character musk qui attrape les lettres dans l'environnement
+
 public class Tux extends EnvNode{
     private Env env ;
     private Room room ;

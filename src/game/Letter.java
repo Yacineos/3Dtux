@@ -11,6 +11,8 @@ import env3d.advanced.EnvNode;
  *
  * @author oukkaly
  */
+
+// class qui permet de représenté une lettre dans l'environnement 3D
 public class Letter extends EnvNode{
     private char letter ;
     private final Env env;

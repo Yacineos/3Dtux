@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
      * @author OUKKAL Yacine
      */
 
+// class nécéssaire dans le jeu devine mot chronometré , pour initialiser un chrono 
 public class Chronometre {
     private long begin;
     private long end;

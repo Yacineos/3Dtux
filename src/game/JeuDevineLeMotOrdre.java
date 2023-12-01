@@ -2,7 +2,7 @@
      * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
      * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
      */
-    package game;
+package game;
 
 import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
@@ -32,6 +32,8 @@ import org.xml.sax.SAXException;
             super();
         }
 
+        
+        // appelé au début de la partie , elle initialise le chronometre et les nbLettersRestantes
         protected void demarrePartie(Partie partie){
             //Le chronomètre soit initialisé en début de partie (démarrePartie)
             this.chrono = new Chronometre(partie.getLimiteTempsEnSecondes());
@@ -42,10 +44,14 @@ import org.xml.sax.SAXException;
             
         }
         
+        
+        // affiche le chronometre dans le jeux 
         protected void displayChrono() {
             menuText.getText("Chrono").modifyTextAndDisplay(chrono.getRemainingTime()+" s");
         } 
         
+        
+        // fonction qui est constamment appelé pour vérifier la collision du tux avec les lettres et pour arreter le chrono quand il trouve tout le mot 
         protected boolean appliqueRegles(Partie partie){
             //System.out.println(this.chrono.getActualTime());
             //puis utilisé pour arrêter le jeu au bout d'un temps limité
@@ -71,6 +77,8 @@ import org.xml.sax.SAXException;
             }
             */
         }
+        
+        // méthode qui rajoute le chrono dans la liste des text qu'on peut afficher
          private void addTextChronoInGame(){
             // ajout de l'affichage du mot à trouver
             menuText.addText(""+this.chrono.getRemainingTime(), "Chrono", 25, 25);
@@ -78,11 +86,12 @@ import org.xml.sax.SAXException;
         }
         
         
+        // nettoie le chrono affiché du display 
         private void cleanChronoInGame(){
-            // ajout de l'affichage du mot à trouver
             menuText.getText("Chrono").clean();
         }
     
+        // méthode appelé lors de la fin de la partie
         protected void terminePartie(Partie partie){
             //Si le mot est déterminé avant le temps limité, 
             //alors le temps qui a été nécessaire pour le trouver est enregistré 

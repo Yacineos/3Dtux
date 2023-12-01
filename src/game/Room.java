@@ -12,6 +12,9 @@ import org.w3c.dom.Document;
  *
  * @author oukkaly
  */
+
+// class Room c'est la boite où le tux sera limité dans ses déplacements et où les lettres sont générées 
+// cette derniere est parsé à l'aide d'un parseur DOM
 public class Room {
     
     

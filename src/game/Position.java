@@ -8,6 +8,8 @@ package game;
  *
  * @author oukkaly
  */
+
+// représente une position sur la map avec 2 coordonée 
 public class Position {
     private double x ;
     private double y ;

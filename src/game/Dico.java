@@ -23,6 +23,10 @@ import org.xml.sax.helpers.DefaultHandler;
  *
  * @author OUKKAL Yacine
  */
+
+
+// class qui permet la construction d'un dictionnaire ce dernier peut être lu avec un parser SAX ou DOM
+
 public class Dico extends DefaultHandler {
     private ArrayList<String> listNiveau1 ;
     private ArrayList<String> listNiveau2 ;

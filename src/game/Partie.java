@@ -12,6 +12,8 @@ import org.w3c.dom.Text;
  *
  * @author oukkaly
  */
+
+// définie une partie qui sera ensuite enregistré dans la DB légère XML des parties 
 public class Partie {
     private final int tempsNiveau1 = 100;
     private final int tempsNiveau2 = 100;

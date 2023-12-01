@@ -16,6 +16,8 @@ import java.util.logging.Logger;
  *
  * @author oukkaly
  */
+
+// class qui représete un profil d'un joueur
 public class Profil {
     private String nom ;
     private String avatar ; // chemin vers un fichier .jpg

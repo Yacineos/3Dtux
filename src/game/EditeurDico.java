@@ -32,6 +32,7 @@ import java.util.logging.Logger;
      * @author OUKKAL Yacine
      */
 
+// class qui permet à l'aide d'un parseur DOM de modifier le dictionnaire , c'est à dire ajouter des nouveau mots 
 public class EditeurDico {
     public Document _doc;
     public String filename;
@@ -87,6 +88,7 @@ public class EditeurDico {
         
     }
 
+    //charge le fichier xml dans la mémoire 
     public void lireDOM(String filename) {
  
         _doc = fromXML(filename);
@@ -94,9 +96,12 @@ public class EditeurDico {
 
     }
 
+    // sauvegarder le fichier chargé en mémoire dans le fichier xml
     public void ecrireDOM(String filename){
         toXML(filename);
     }
+    
+    
     public Document fromXML(String nomFichier) {
         try {
             return XMLUtil.DocumentFactory.fromFile(nomFichier);

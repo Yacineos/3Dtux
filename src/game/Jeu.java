@@ -27,6 +27,8 @@ import org.xml.sax.SAXException;
  *
  * @author gladen
  */
+
+// classe principal qui définie un jeu 
 public abstract class Jeu {
 
     
@@ -46,7 +48,7 @@ public abstract class Jeu {
     private final Room menuRoom;
     
     
-    protected EnvTextMap menuText;                         //text (affichage des texte du jeu)
+    protected EnvTextMap menuText;//text (affichage des texte du jeu)
     
     
     
