@@ -1,161 +1,271 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<dictionnaire xmlns="http://myGame/tux" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://myGame/tux ../xsd/dico.xsd">
-                        
-    
-    
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><dictionnaire xmlns="http://myGame/tux" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://myGame/tux ../xsd/dico.xsd">
+                                            
+
     
     
     <!-- english 3 to 4 letters length-->
-                        
-    
+        
     
     
     
     <difficulte niveau="1">
-                                                
-        
-        
-        
+                
         
         <mot>tate</mot>
-                                                
+                                                                                        
+        
+        
+        
+        
+        
         
         
         
         
         <mot>push</mot>
-                                                
+                                                                                        
+        
+        
+        
+        
+        
         
         
         
         
         <mot>step</mot>
+                                                                                    
+    
+    
+        
+        
+        
+        
+      
+    
+        <mot>dru</mot>
+    <mot>dru</mot><mot>dru</mot></difficulte>
                                             
     
     
-        <mot>drug</mot>
-    </difficulte>
-                        
+    
+    
+    
     
     
     
     
     <!-- english 5 to 6 letters length -->
-                      
+                                          
+    
+    
+    
+    
+    
     
     
     
     
     
     <difficulte niveau="2">
-                                                
+                                                                                        
+        
+        
+        
+        
+        
         
         
         
         
         <mot>andrew</mot>
-                                                
+                                                                                        
+        
+        
+        
+        
+        
         
         
         
         
         <mot>water</mot>
-                                            
+                                                                                    
+    
+    
+    
+    
+    
     
     
     
     
     
     </difficulte>
-                        
+                                            
+    
+    
+    
+    
+    
     
     
     
     
     <!-- english 7 to 8 letters-->
-                      
+                                          
+    
+    
+    
+    
+    
     
     
     
     
     
     <difficulte niveau="3">
-                                                
+                                                                                        
+        
+        
+        
+        
+        
         
         
         
         
         <mot>hustlers</mot>
-                                                
+                                                                                        
+    
+    
+    
+    
+    
     
     
     
     
     
     </difficulte>
-                          
+                                              
+    
+    
+    
+    
+    
     
     
     
     
     <!-- english 9 to 10 letters-->
-                        
+                                            
+    
+    
+    
+    
+    
     
     
     
     
     <difficulte niveau="4">
-                                                
+                                                                                        
+        
+        
+        
+        
+        
         
         
         
         
         <mot>cobratate</mot>
-                                                
+                                                                                        
+        
+        
+        
+        
+        
         
         
         
         
         <mot>university</mot>
-                                           
+                                                                                   
+    
+    
+    
+    
+    
     
     
     
     
     
     </difficulte>
-                      
+                                          
+    
+    
+    
+    
+    
     
     
     
     
     
     <!-- english 11 and more -->
-                        
-    
-    
-    
-    
-    <difficulte niveau="5">
-                                                
-        
-        
-        
-        
-        <mot>yachtswoman</mot>
-                                                
-        
-        
-        
-        
-        <mot>sparklingwater</mot>
                                             
     
     
     
     
+    
+    
+    
+    
+    
+    <difficulte niveau="5">
+                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <mot>yachtswoman</mot>
+                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <mot>sparklingwater</mot>
+                                                                                    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     </difficulte>
-                         
+                                             
+
+
+
+
+
 
 
 

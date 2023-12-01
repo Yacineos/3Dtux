@@ -330,7 +330,7 @@ public class XMLUtil {
             }
             t.setOutputProperty(OutputKeys.ENCODING, "UTF-8"); // NOI18N
 
-            t.setOutputProperty(OutputKeys.INDENT, "yes"); // NOI18N
+            t.setOutputProperty(OutputKeys.INDENT, "no"); // NOI18N
 
             t.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4"); // NOI18N
 
@@ -339,7 +339,7 @@ public class XMLUtil {
             t.transform(source, result);
 
         }
-
+        
         /**
          * Cette méthode applique une transformation à un Document DOM et
          * renvoie le document transformé sous la forme d'une chaine de
