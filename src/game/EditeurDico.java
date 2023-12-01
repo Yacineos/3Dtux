@@ -27,6 +27,11 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+    /**
+     *
+     * @author OUKKAL Yacine
+     */
+
 public class EditeurDico {
     public Document _doc;
     public String filename;

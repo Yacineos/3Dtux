@@ -38,13 +38,20 @@ import org.xml.sax.SAXException;
             //on lance le chrono 
             this.chrono.start();
             this.nbLettersRestantes = super.getLettres().size();
+            addTextChronoInGame();
             
         }
+        
+        protected void displayChrono() {
+            menuText.getText("Chrono").modifyTextAndDisplay(chrono.getRemainingTime()+" s");
+        } 
         
         protected boolean appliqueRegles(Partie partie){
             //System.out.println(this.chrono.getActualTime());
             //puis utilisé pour arrêter le jeu au bout d'un temps limité
-            if(nbLettersRestantes > 0){
+            
+            if(nbLettersRestantes > 0 && this.chrono.remainsTime()){
+                displayChrono();
                 if(tuxTrouveLettre()){
                     this.nbLettersRestantes--;
                     System.out.println(""+this.chrono.getActualTime());
@@ -53,6 +60,7 @@ import org.xml.sax.SAXException;
                 return true;
             }else{
                 this.chrono.stop();
+                
                 return false ;
                 
             }
@@ -63,6 +71,18 @@ import org.xml.sax.SAXException;
             }
             */
         }
+         private void addTextChronoInGame(){
+            // ajout de l'affichage du mot à trouver
+            menuText.addText(""+this.chrono.getRemainingTime(), "Chrono", 25, 25);
+        
+        }
+        
+        
+        private void cleanChronoInGame(){
+            // ajout de l'affichage du mot à trouver
+            menuText.getText("Chrono").clean();
+        }
+    
         protected void terminePartie(Partie partie){
             //Si le mot est déterminé avant le temps limité, 
             //alors le temps qui a été nécessaire pour le trouver est enregistré 
@@ -70,6 +90,8 @@ import org.xml.sax.SAXException;
             
             partie.setTrouve(this.nbLettersRestantes);
             partie.setTemps(this.chrono.getSeconds());
+            // on efface le chrono de l'écran 
+            cleanChronoInGame();
             if(this.chrono.remainsTime()){
                 System.out.println("Félicitations votre temps est de : "+ partie.getTemps());
             }else{ 

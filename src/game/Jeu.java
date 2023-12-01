@@ -127,6 +127,7 @@ public abstract class Jeu {
         menuText.addText(mot, "mot", 250, 240);
     }
     
+    
     private void addTextCinqDernieresParties(ArrayList<Partie> cinqDernieresPartiesDuJoueur){
         menuText.addText("Choisissez une Partie : ", "ChoixPartie", 200, 300);
         // la plus récente
@@ -137,6 +138,8 @@ public abstract class Jeu {
 
         
     }
+    
+    
     
     private void displayMotATrouver() {
         menuText.getText("motATrouver").display();
@@ -230,6 +233,14 @@ public abstract class Jeu {
     private int getChoixToucheAppuyeeCinqChoix(){
         int res = 0;
         while (!(res == Keyboard.KEY_1 || res == Keyboard.KEY_2 || res == Keyboard.KEY_3 || res == Keyboard.KEY_4 || res == Keyboard.KEY_5)) {
+            res = env.getKey();
+            env.advanceOneFrame();
+        }
+        return res ;
+    }
+    private int getChoixToucheAppuyeeSixChoix(){
+        int res = 0;
+        while (!(res == Keyboard.KEY_1 || res == Keyboard.KEY_2 || res == Keyboard.KEY_3 || res == Keyboard.KEY_4 || res == Keyboard.KEY_5 || res == Keyboard.KEY_6)) {
             res = env.getKey();
             env.advanceOneFrame();
         }
@@ -376,15 +387,16 @@ public abstract class Jeu {
                         displayDesCinqDernieresParties(cinqsDernieresParties.size());
                         // donner la main à l'utilisateur pour séléctionner
                         // vérifie qu'une touche 1, 2, 3 ou 4 est pressée
-                        int touche3 = getChoixToucheAppuyeeCinqChoix();
+                        int touche3 = getChoixToucheAppuyeeSixChoix();
 
                         // charger la partie choisie
                         //si il y a au moins 1 partie 
                         if(cinqsDernieresParties.size()>0){
+                            boolean onChargeUnePartie = true ;
                             switch(touche3){
                                 case Keyboard.KEY_1:
                                     partie = cinqsDernieresParties.get(cinqsDernieresParties.size()-1);
-                                   
+                                    
                                     break;
                                 case Keyboard.KEY_2:
                                     partie = cinqsDernieresParties.get(cinqsDernieresParties.size()-2);
@@ -399,49 +411,51 @@ public abstract class Jeu {
                                     partie = cinqsDernieresParties.get(cinqsDernieresParties.size()-5);
                                     break;
                                 default :
-                                     partie = new Partie(getCurrentDate(),"tate",1);
+                                    partie = new Partie();
+                                    onChargeUnePartie = false;
                                     break;
                             }
+                            if(onChargeUnePartie ){
                             
-                            
-                            this.mot= partie.getMot();
-                            
-                            
-                            
-                             // génère des positions aléatoires et place les lettres dans la map 
-                    
-                            genererLettresMotRandomPosition();
-                            
-                            cleanDesCinqDernieresParties(cinqsDernieresParties.size());
+                                this.mot= partie.getMot();
 
-                            // .......... dico.******
-                            addTextMotATrouver(mot);
 
-                            displayMotATrouver();
 
-                            env.advanceOneFrame();
-                            TimeUnit.SECONDS.sleep(5);
-                            env.advanceOneFrame();
+                                 // génère des positions aléatoires et place les lettres dans la map 
 
-                            cleanMotATrouver();
+                                genererLettresMotRandomPosition();
 
-                            env.setRoom(mainRoom);
+                                cleanDesCinqDernieresParties(cinqsDernieresParties.size());
+
+                                // .......... dico.******
+                                addTextMotATrouver(mot);
+
+                                displayMotATrouver();
+
+                                env.advanceOneFrame();
+                                TimeUnit.SECONDS.sleep(5);
+                                env.advanceOneFrame();
+
+                                cleanMotATrouver();
+
+                                env.setRoom(mainRoom);
+
+                                // crée la date d'aujourd'hui au format yyyy-mm-dd
+                                datePartieFraichementCree = getCurrentDate();
+                                // crée un nouvelle partie avec la date du jour ou la partie est crée , avec le mot parsé aléatoirement et avec le niveau qui correspond au mot 
+                                partie.setDate(datePartieFraichementCree);
+
+                                // on joue à la partie rechargé
+                                joue(partie);
+
+                                profil.ajoueterPartie(partie);
+                                profil.sauvegarder(profil.getNom());
                             
-                            // crée la date d'aujourd'hui au format yyyy-mm-dd
-                            datePartieFraichementCree = getCurrentDate();
-                            // crée un nouvelle partie avec la date du jour ou la partie est crée , avec le mot parsé aléatoirement et avec le niveau qui correspond au mot 
-                            partie.setDate(datePartieFraichementCree);
-                            
-                            // on joue à la partie rechargé
-                            joue(partie);
-                            
-                            profil.ajoueterPartie(partie);
-                            profil.sauvegarder(profil.getNom());
-                            
+                            }
                         }
                         
                         
-                       
+                       cleanDesCinqDernieresParties(cinqsDernieresParties.size());
                     // enregistre la partie dans le profil --> enregistre le profil
                     // .......... profil.******
                     playTheGame = MENU_VAL.MENU_JOUE;
@@ -817,6 +831,10 @@ public abstract class Jeu {
         return word.matches("^[a-zA-Z]{3,}$");
     }
     
+    // méthode qui affiche dans le jeu le temps qui reste pour une partie 
+    private void afficheTempsPartieRestant(){
+        
+    }
     
 // test purpose
 
