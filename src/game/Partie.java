@@ -57,7 +57,7 @@ public class Partie {
         this.temps=(int) Double.parseDouble(temps);
         this.date=Profil.xmlDateToProfileDate(date);
         this.niveau=Integer.parseInt(niveauString);
-        
+        this.limiteTempsEnSecondes = calculTempsAPartirDuNiveau(niveau);
          try{
             this.trouve=Integer.parseInt(trouvé);
         }catch(Exception ex){//Si trouvé n'est pas initialisé on attrape l'exception et on initialise a 0

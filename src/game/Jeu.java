@@ -150,7 +150,7 @@ public abstract class Jeu {
     
     private void displayDesCinqDernieresParties(int nbParties){
          menuText.getText("ChoixPartie").display();
-         menuText.getText("RetourChoixPartie").display();
+        // menuText.getText("RetourChoixPartie").display();
         for(int i = 0 ; i < nbParties ; i++){
             menuText.getText("Partie"+(i+1)).display();
         }
@@ -175,7 +175,7 @@ public abstract class Jeu {
         for(int i = 0 ; i < nbParties ; i++){
             menuText.getText("Partie"+(i+1)).clean();
         }
-         menuText.getText("RetourChoixPartie").clean();
+         //menuText.getText("RetourChoixPartie").clean();
     }
     
     private void displayChoixNiveau(){
@@ -389,16 +389,15 @@ public abstract class Jeu {
                         displayDesCinqDernieresParties(cinqsDernieresParties.size());
                         // donner la main à l'utilisateur pour séléctionner
                         // vérifie qu'une touche 1, 2, 3 ou 4 est pressée
-                        int touche3 = getChoixToucheAppuyeeSixChoix();
+                        int touche3 = getChoixToucheAppuyeeCinqChoix();
 
                         // charger la partie choisie
                         //si il y a au moins 1 partie 
                         if(cinqsDernieresParties.size()>0){
-                            boolean onChargeUnePartie = true ;
+                           
                             switch(touche3){
                                 case Keyboard.KEY_1:
                                     partie = cinqsDernieresParties.get(cinqsDernieresParties.size()-1);
-                                    
                                     break;
                                 case Keyboard.KEY_2:
                                     partie = cinqsDernieresParties.get(cinqsDernieresParties.size()-2);
@@ -413,11 +412,10 @@ public abstract class Jeu {
                                     partie = cinqsDernieresParties.get(cinqsDernieresParties.size()-5);
                                     break;
                                 default :
-                                    partie = new Partie();
-                                    onChargeUnePartie = false;
+                                    partie = new Partie("01/12/2023","tate",1);
                                     break;
                             }
-                            if(onChargeUnePartie ){
+                            
                             
                                 this.mot= partie.getMot();
 
@@ -453,11 +451,11 @@ public abstract class Jeu {
                                 profil.ajoueterPartie(partie);
                                 profil.sauvegarder(profil.getNom());
                             
-                            }
+                            
                         }
                         
                         
-                       cleanDesCinqDernieresParties(cinqsDernieresParties.size());
+                      // cleanDesCinqDernieresParties(cinqsDernieresParties.size());
                     // enregistre la partie dans le profil --> enregistre le profil
                     // .......... profil.******
                     playTheGame = MENU_VAL.MENU_JOUE;

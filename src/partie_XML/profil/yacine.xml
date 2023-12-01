@@ -1,7 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<profil xmlns="http://myGame/tux" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://myGame/tux xsd/profil.xsd">
-    <nom>yacine</nom>
-    <avatar/>
-    <anniversaire>2023-03-03</anniversaire>
-    <parties/>
-</profil>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><profil xmlns="http://myGame/tux" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://myGame/tux xsd/profil.xsd"><nom>yacine</nom><avatar/><anniversaire>2000-12-22</anniversaire><parties><partie date="2023-12-01" trouvé="100"><temps>4</temps><mot niveau="2">ajute</mot></partie></parties></profil>
