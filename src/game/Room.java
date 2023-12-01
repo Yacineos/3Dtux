@@ -4,6 +4,10 @@
  */
 package game;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.w3c.dom.Document;
+
 /**
  *
  * @author oukkaly
@@ -22,6 +26,7 @@ public class Room {
     private String textureSouth;
     
     public Room(){
+        /*
         this.depth = 100;
         this.width = 100;
         this.height = 60;
@@ -29,6 +34,24 @@ public class Room {
         this.textureNorth = "textures/skybox/default/north.png";
         this.textureEast = "textures/skybox/default/east.png";
         this.textureWest = "textures/skybox/default/west.png";
+        */
+        parsingDOMEnvironnement();
+    }
+    
+    private void parsingDOMEnvironnement(){
+        try{
+            Document _doc=XMLUtil.DocumentFactory.fromFile("src/partie_XML/xml/plateau.xml");
+            this.height=Integer.parseInt(_doc.getElementsByTagName("height").item(0).getTextContent());
+            this.width=Integer.parseInt(_doc.getElementsByTagName("width").item(0).getTextContent());
+            this.depth=Integer.parseInt(_doc.getElementsByTagName("depth").item(0).getTextContent());
+            this.textureBottom=_doc.getElementsByTagName("textureBottom").item(0).getTextContent();
+            this.textureNorth=_doc.getElementsByTagName("textureNorth").item(0).getTextContent();
+            this.textureEast=_doc.getElementsByTagName("textureEast").item(0).getTextContent();
+            this.textureWest=_doc.getElementsByTagName("textureWest").item(0).getTextContent();
+        }catch(Exception e){
+            Logger.getLogger(Profil.class.getName()).log(Level.SEVERE, null, e);
+        }
+       
     }
 
     public int getDepth() {

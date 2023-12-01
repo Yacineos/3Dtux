@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <profil xmlns="http://myGame/tux" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://myGame/tux xsd/profil.xsd">
-                                            
+                                                    
+    
+    
     
     
     
@@ -11,7 +13,9 @@
     
     
     <nom>u</nom>
-                                            
+                                                    
+    
+    
     
     
     
@@ -22,7 +26,9 @@
     
     
     <avatar/>
-                                            
+                                                    
+    
+    
     
     
     
@@ -33,7 +39,9 @@
     
     
     <anniversaire>2023-12-22</anniversaire>
-                                            
+                                                    
+    
+    
     
     
     
@@ -44,7 +52,9 @@
     
     
     <parties>
-                                                                                
+                                                                                                
+        
+        
         
         
         
@@ -54,7 +64,9 @@
         
         
         <partie date="2023-11-30" trouvé="0">
-                                                                                                                        
+                                                                                                                                                
+            
+            
             
             
             
@@ -64,7 +76,9 @@
             
             
             <temps>-1701352307</temps>
-                                                                                                                        
+                                                                                                                                                
+            
+            
             
             
             
@@ -74,7 +88,9 @@
             
             
             <mot niveau="5">sparklingwater</mot>
-                                                                                                                    
+                                                                                                                                            
+        
+        
         
         
         
@@ -84,7 +100,9 @@
         
         
         </partie>
-                                                                            
+                                                                                            
+        
+        
         
         
         
@@ -94,7 +112,9 @@
         
         
         <partie date="2023-11-30" trouvé="100">
-                                                                                                            
+                                                                                                                                    
+            
+            
             
             
             
@@ -103,7 +123,9 @@
             
             
             <temps>17</temps>
-                                                                                                            
+                                                                                                                                    
+            
+            
             
             
             
@@ -112,7 +134,9 @@
             
             
             <mot niveau="1">tate</mot>
-                                                                                                        
+                                                                                                                                
+        
+        
         
         
         
@@ -121,7 +145,7 @@
         
         
         </partie>
-                                                                    
+                                                                                    
         
         
        
@@ -134,15 +158,61 @@
         
         
         
+        
+        
+        <partie date="2023-11-30" trouvé="100">
+                                                                        
+            
+            
+            
+            
+            <temps>3</temps>
+                                                                        
+            
+            
+            
+            
+            <mot niveau="1">push</mot>
+                                                                    
+        
+        
+        
+        
+        </partie>
+                                            
+        
+        
+        
+        
+        <partie date="2023-11-30" trouvé="0">
+                                                            
+            
+            
+            
+            <temps>-1701352307</temps>
+                                                            
+            
+            
+            
+            <mot niveau="5">sparklingwater</mot>
+                                                        
+        
+        
+        
+        </partie>
+                                    
+        
+        
+        
         <partie date="2023-11-30" trouvé="100">
                                                 
             
             
-            <temps>3</temps>
+            <temps>5</temps>
                                                 
             
             
-            <mot niveau="1">push</mot>
+            <mot niveau="2">water</mot>
                                             
         
         
@@ -150,13 +220,13 @@
                             
         
         
-        <partie date="2023-11-30" trouvé="0">
+        <partie date="2023-11-30" trouvé="100">
                                     
             
-            <temps>-1701352307</temps>
+            <temps>4</temps>
                                     
             
-            <mot niveau="5">sparklingwater</mot>
+            <mot niveau="2">water</mot>
                                 
         
         </partie>
@@ -164,18 +234,36 @@
         
         <partie date="2023-11-30" trouvé="100">
                         
+            <temps>66</temps>
+                        
+            <mot niveau="5">sparklingwater</mot>
+                    
+        </partie>
+                
+        <partie date="2023-11-30" trouvé="100">
+                        
             <temps>5</temps>
+                        
+            <mot niveau="2">water</mot>
+                    
+        </partie>
+                
+        <partie date="2023-11-30" trouvé="100">
+                        
+            <temps>20</temps>
                         
             <mot niveau="2">water</mot>
                     
         </partie>
             
         <partie date="2023-11-30" trouvé="100">
-            <temps>4</temps>
+            <temps>3</temps>
             <mot niveau="2">water</mot>
         </partie>
     </parties>
-                                        
+                                                
+
+
 
 
 

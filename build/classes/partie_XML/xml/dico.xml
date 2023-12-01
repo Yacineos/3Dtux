@@ -19,7 +19,18 @@
     <!-- english 7 to 8 letters-->  
     <difficulte niveau="3">
         <mot>hustlers</mot>
-        
+          <mot>tate</mot>
+        <mot>push</mot>
+        <mot>step</mot>
+    </difficulte>
+    <!-- english 5 to 6 letters length -->  
+    <difficulte niveau="2">
+        <mot>andrew</mot>
+        <mot>water</mot>    
+    </difficulte>
+    <!-- english 7 to 8 letters-->  
+    <difficulte niveau="3">
+        <mot>hustlers</mot>
     </difficulte>
       <!-- english 9 to 10 letters-->
     <difficulte niveau="4">
