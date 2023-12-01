@@ -35,15 +35,10 @@ public class EditeurDico {
         this.filename=filename;
     }
 
-    public boolean editer(String mot, int niveau){
-        boolean status = false ;
-        if(isValidEnglishWord(mot)){
+    public void editer(String mot, int niveau){
             lireDOM(filename);
             ajouterMot(mot, niveau);
             ecrireDOM(filename);
-            status = true ;
-        }
-        return status ;
     }
     // on suppose que le dictionnaire est au moins remplie avec un mot de chaque difficultee
     public void ajouterMot(String mot, int niveau){
@@ -115,18 +110,11 @@ public class EditeurDico {
         }
     }
    
-    // Use a regular expression to check if the word contains only english letters
-    private boolean isValidEnglishWord(String word) {
-        return word.matches("^[a-zA-Z]{3,}$");
-    }
+    
     
     public static void main(String[] args){
         EditeurDico editDic = new EditeurDico("src/partie_XML/dico.xml");
-        if(editDic.editer("dru", 1)){
-            System.out.println("le mot est inséré avec success");
-        }else{
-            System.out.println("le mot n'est pas inséré on est pas des baguettes");
-        }
+        
        
     }
    

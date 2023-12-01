@@ -103,12 +103,14 @@ public abstract class Jeu {
         menuText.addText("4. Quitter le jeu ?", "Jeu4", 250, 220);
         // 3 eme page
         menuText.addText("Choisissez un nom de joueur : ", "NomJoueur", 200, 300);
+        menuText.addText("Entrer un mot anglais >3 lettres sans caractères spéciaux : ", "nomAInserer", 60, 300);
         // 4 eme page si création de nouveau profile
         menuText.addText("Entrez votre date de naissance au format ddmmyyyy: ", "Anniversaire", 120, 300);
         // 2 eme page
         menuText.addText("1. Charger un profil de joueur existant ?", "Principal1", 250, 280);
         menuText.addText("2. Créer un nouveau joueur ?", "Principal2", 250, 260);
-        menuText.addText("3. Sortir du jeu ?", "Principal3", 250, 240);
+        menuText.addText("3. Ajouter un mot au dictionnaire ?", "Principal3", 250, 240);
+        menuText.addText("4. Sortir du jeu ?", "Principal4", 250, 220);
         // menu Jeu
         menuText.addText("Choisissez une difficulte : ", "Difficulte", 200, 300);
         menuText.addText("- Niveau 1 ", "Niveau1", 250, 280);
@@ -153,6 +155,7 @@ public abstract class Jeu {
         menuText.getText("Principal1").display();
         menuText.getText("Principal2").display();
         menuText.getText("Principal3").display();
+        menuText.getText("Principal4").display();
     }
     
     private void displayMenuJeu(){
@@ -184,6 +187,7 @@ public abstract class Jeu {
         menuText.getText("Principal1").clean();
         menuText.getText("Principal2").clean();
         menuText.getText("Principal3").clean();
+        menuText.getText("Principal4").clean();
     }
     
     private void cleanMenuJeu(){
@@ -260,6 +264,18 @@ public abstract class Jeu {
         menuText.getText("NomJoueur").clean();
         return nomJoueur;
     }
+    
+    
+    // lit un mot de l'entrée stendard et l'affiche au fur et à mesure de l'écriture et le renvoie une fois l'utilisateur entre Entrer
+    private String getNomNouveauNom() {
+        String nomAInserer = "";
+        menuText.getText("nomAInserer").display();
+        nomAInserer = menuText.getText("nomAInserer").lire(true);
+        menuText.getText("nomAInserer").clean();
+        return nomAInserer;
+    }
+    
+    
     // fourni
     private String getAnniversaire() {
         String anniversaire = "";
@@ -461,7 +477,7 @@ public abstract class Jeu {
         displayMenuPrincipal();
                
         // vérifie qu'une touche 1, 2 ou 3 est pressée
-        int touche = getChoixToucheAppuyeeTroisChoix();
+        int touche = getChoixToucheAppuyeeQuatreChoix();
 
         cleanMenuPrincipal();
 
@@ -490,7 +506,7 @@ public abstract class Jeu {
                         choix = menuJeu();
                     } else {
 
-                        choix = MENU_VAL.MENU_SORTIE;//CONTINUE;
+                        choix = MENU_VAL.MENU_CONTINUE;//CONTINUE;
                     }
 
                 }while(!success);
@@ -518,11 +534,66 @@ public abstract class Jeu {
                 }
                 break;
 
+                
+                
+                
             // -------------------------------------
-                // Touche 3 : Sortir du jeu
+            // Touche 3 : ajouter un nouveau mot
             // -------------------------------------
             case Keyboard.KEY_3:
+            
+                String motAAjouter="";
+                // est ce que l'utilisateur à saisie un mot conforme ?
+                success = false ;
+                // tant que le mot entré n'est pas conforme on redemande un autre nom
+                do{
+                    // demande le nom à insérer dans le dico
+                     motAAjouter= getNomNouveauNom();
+                    // charge le profil de ce joueur si possible
+                }while(!isValidEnglishWord(motAAjouter));
+                    
+                    // si le mot il est conforme on le rajoute au dictionnaire 
+                        // init de EditeurDico et l'ajout du mot 
+                        EditeurDico editDico = new EditeurDico("src/partie_XML/dico.xml");
+                        switch(motAAjouter.length()){
+                            // si le mot il fait moins de 3 char on fait rien , normalement c'est jamais le cas mais juste par mesure de sécurité 
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            case 3:
+                            case 4:
+                                editDico.editer(motAAjouter, 1);
+                                break ;
+                            case 5:
+                            case 6:
+                                editDico.editer(motAAjouter, 2);
+                                break ;
+                            case 7:
+                            case 8:
+                                editDico.editer(motAAjouter, 3);
+                                break ;
+                            case 9:
+                            case 10:
+                                editDico.editer(motAAjouter, 4);
+                                break ;
+                            default:
+                                editDico.editer(motAAjouter, 5);
+                                break;
+                        }
+                        
+                        // revenir au menu principal
+                                                
+                    choix = MENU_VAL.MENU_CONTINUE;
+                    break;
+
+
+            // -------------------------------------
+            // Touche 4 : Sortir du jeu
+            // -------------------------------------
+            case Keyboard.KEY_4:
                 choix = MENU_VAL.MENU_SORTIE;
+                break;
         }
         return choix;
     }
@@ -738,6 +809,14 @@ public abstract class Jeu {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return currentDate.format(formatter);
     }
+    
+    
+    
+    // Use a regular expression to check if the word contains only english letters
+    private boolean isValidEnglishWord(String word) {
+        return word.matches("^[a-zA-Z]{3,}$");
+    }
+    
     
 // test purpose
 

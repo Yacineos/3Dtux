@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<dictionnaire xmlns="http://myGame/tux" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://myGame/tux ../xsd/dico.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><dictionnaire xmlns="http://myGame/tux" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:schemaLocation="http://myGame/tux ../xsd/dico.xsd">
                                             
 
     
@@ -7,45 +6,17 @@
     <!-- english 3 to 4 letters length-->
         
     
-    
-    
     <difficulte niveau="1">
                 
         
         <mot>tate</mot>
-                                                                                        
-        
-        
-        
-        
-        
-        
-        
-        
         
         <mot>push</mot>
-                                                                                        
-        
-        
-        
-        
-        
-        
-        
-        
         
         <mot>step</mot>
                                                                                     
-    
-    
-        
-        
-        
-        
-      
-    
         <mot>dru</mot>
-    </difficulte>
+    <mot>dru</mot><mot>dru</mot><mot>yac</mot><mot>yic</mot><mot>test</mot><mot>tsta</mot></difficulte>
                                             
     
     
@@ -102,7 +73,7 @@
     
     
     
-    </difficulte>
+    <mot>yacne</mot></difficulte>
                                             
     
     
@@ -260,7 +231,7 @@
     
     
     
-    </difficulte>
+    <mot>anicnstnkjshlsf</mot></difficulte>
                                              
 
 
